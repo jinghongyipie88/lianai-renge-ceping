@@ -1,0 +1,2652 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FF5C8A">
+<title>测一测你的恋爱人格</title>
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23FF5C8A" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+/* ===== 基础 token（粉色 × 清新薄荷） ===== */
+:root{
+  --pink:#FF5C8A;
+  --pink-deep:#F72585;
+  --pink-soft:#FFC2D1;
+  --mint:#3DD6C4;
+  --mint-soft:#E6FFFB;
+  --ink:#6B2149;
+  --ink-2:#8A5E77;
+  --card:#FFFFFF;
+  --grad:linear-gradient(135deg,#FF8FAB 0%,#FF5C8A 55%,#F72585 100%);
+  --grad-soft:linear-gradient(160deg,#FFF5F7 0%,#FFFFFF 45%,#F2FFFB 100%);
+  --radius:22px;
+  --shadow:0 12px 32px rgba(247,37,133,.13);
+  --shadow-btn:0 16px 32px rgba(247,37,133,.32);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  background:var(--grad-soft) fixed;
+  color:var(--ink);
+  min-height:100vh;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+button{font-family:inherit;cursor:pointer;}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px;}
+
+/* ===== 应用容器（手机优先，桌面居中成卡片） ===== */
+.app{
+  position:relative;
+  max-width:520px;
+  margin:0 auto;
+  min-height:100vh;
+  overflow:hidden;
+  padding:0 20px calc(20px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.42);
+}
+@media (min-width:768px){
+  body{background:linear-gradient(120deg,#FFF5F7,#FDF7FB 45%,#F0FFFC);}
+  .app{background:rgba(255,255,255,.72);box-shadow:0 0 60px rgba(247,37,133,.12);}
+}
+.blob{position:absolute;border-radius:50%;filter:blur(58px);opacity:.55;pointer-events:none;}
+.blob-1{width:280px;height:280px;background:#FFC2D1;top:-90px;right:-100px;animation:floaty 8s ease-in-out infinite;}
+.blob-2{width:260px;height:260px;background:#C2F5ED;bottom:-80px;left:-110px;animation:floaty 9s ease-in-out infinite reverse;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+
+/* ===== 视图切换 ===== */
+.view{display:none;min-height:100vh;flex-direction:column;position:relative;}
+.view.active{display:flex;animation:viewIn .45s ease;}
+@keyframes viewIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+
+/* ===== 首页 ===== */
+.home-inner{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:52px 8px 40px;position:relative;z-index:1;
+}
+.float-heart{position:absolute;opacity:.4;animation:floaty 6s ease-in-out infinite;pointer-events:none;}
+.fh-1{width:22px;height:22px;top:14%;left:8%;animation-delay:.4s;}
+.fh-2{width:16px;height:16px;top:26%;right:9%;animation-delay:1.6s;}
+.fh-3{width:26px;height:26px;bottom:22%;left:12%;animation-delay:2.4s;}
+.fh-4{width:18px;height:18px;bottom:16%;right:12%;animation-delay:3.2s;}
+.logo-badge{
+  width:92px;height:92px;border-radius:30px;background:var(--grad);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-btn);margin-bottom:26px;transform:rotate(-6deg);
+}
+.logo-badge svg{width:44px;height:44px;}
+h1{
+  font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif;
+  font-size:clamp(34px,10vw,44px);line-height:1.3;color:var(--ink);
+  letter-spacing:1px;margin-bottom:14px;font-weight:400;
+}
+.subtitle{font-size:18.5px;color:var(--ink-2);line-height:1.8;margin-bottom:36px;}
+.btn-start{
+  width:100%;max-width:340px;height:68px;border:none;border-radius:999px;
+  background:var(--grad);color:#fff;font-size:21px;font-weight:700;letter-spacing:4px;
+  box-shadow:var(--shadow-btn);transition:transform .15s ease,box-shadow .15s ease;
+}
+.btn-start:active{transform:scale(.96);}
+.home-tags{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:34px;max-width:360px;margin-left:auto;margin-right:auto;}
+.home-tags span{
+  font-size:14px;color:var(--pink-deep);background:rgba(255,255,255,.88);
+  padding:9px 16px;border-radius:999px;box-shadow:0 4px 14px rgba(247,37,133,.1);
+  text-align:center;
+}
+.home-note{font-size:15.5px;color:#8A5E77;margin-top:20px;}
+
+/* ===== 答题页 ===== */
+.quiz-top{display:flex;align-items:center;gap:10px;padding:22px 0 2px;}
+.icon-btn{
+  width:46px;height:46px;flex:none;border:none;border-radius:50%;
+  background:#fff;box-shadow:0 6px 18px rgba(247,37,133,.14);
+  display:flex;align-items:center;justify-content:center;color:var(--pink-deep);
+  transition:transform .12s ease;
+}
+.icon-btn:active{transform:scale(.92);}
+.icon-btn svg{width:20px;height:20px;}
+.link-home{
+  flex:none;border:none;background:#fff;color:var(--pink-deep);
+  font-size:13px;font-weight:600;padding:10px 15px;border-radius:999px;
+  box-shadow:0 6px 18px rgba(247,37,133,.14);transition:transform .12s ease;
+}
+.link-home:active{transform:scale(.94);}
+.progress-wrap{flex:1;min-width:0;}
+.progress-text{font-size:14.5px;color:var(--ink-2);margin-bottom:6px;font-weight:500;}
+.progress-text b{color:var(--pink-deep);font-size:15px;}
+.progress-bar{height:10px;border-radius:999px;background:rgba(255,255,255,.92);box-shadow:inset 0 1px 3px rgba(247,37,133,.16);overflow:hidden;}
+.progress-fill{height:100%;width:5%;border-radius:999px;background:var(--grad);transition:width .45s ease;}
+.quiz-tip{font-size:15px;color:#8A5E77;text-align:right;padding-top:4px;font-weight:600;}
+.q-stage{padding-top:30px;flex:1;}
+.q-stage.out{animation:slideOut .22s ease forwards;}
+.q-stage.out-rev{animation:slideOutRev .22s ease forwards;}
+.q-stage.in{animation:slideIn .32s ease;}
+@keyframes slideOut{to{opacity:0;transform:translateX(-40px);}}
+@keyframes slideOutRev{to{opacity:0;transform:translateX(40px);}}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:none;}}
+.q-badge{
+  display:inline-block;font-size:13px;font-weight:700;color:#fff;
+  background:var(--grad);padding:6px 18px;border-radius:999px;margin-bottom:18px;
+  letter-spacing:1px;
+}
+.q-text{
+  font-size:clamp(22px,6.2vw,27px);line-height:1.65;color:var(--ink);
+  margin-bottom:28px;font-weight:700;
+}
+.q-options{display:flex;flex-direction:column;gap:16px;}
+.option{
+  display:flex;align-items:center;gap:14px;width:100%;
+  min-height:64px;padding:14px 18px;text-align:left;
+  background:#fff;border:2px solid transparent;border-radius:20px;
+  box-shadow:var(--shadow);font-size:16.5px;line-height:1.5;color:var(--ink);
+  transition:transform .12s ease,border-color .12s ease;
+  opacity:0;animation:optIn .42s ease forwards;animation-delay:calc(var(--i)*90ms);
+}
+.option:active{transform:scale(.97);}
+.option:hover{border-color:#FFC2D1;}
+@keyframes optIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.opt-letter{
+  width:36px;height:36px;flex:none;border-radius:12px;
+  background:linear-gradient(160deg,#FFF0F4,#E6FFFB);color:var(--pink-deep);
+  font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;
+}
+
+
+/* ===== 出生日期卡片 ===== */
+.birth-card{
+  margin:22px auto 0;width:100%;max-width:340px;background:rgba(255,255,255,.86);
+  border:1.5px solid rgba(255,92,138,.35);border-radius:22px;padding:16px 16px 18px;
+  box-shadow:0 8px 24px rgba(247,37,133,.10);backdrop-filter:blur(6px);
+}
+.birth-label{display:flex;align-items:center;gap:7px;font-size:15px;color:var(--ink);font-weight:700;justify-content:center;margin-bottom:12px;}
+.birth-label svg{width:16px;height:16px;color:var(--pink);flex:none;}
+.birth-sub{font-size:14.5px;color:var(--ink-2);text-align:center;margin-bottom:10px;}
+.birth-row{display:flex;gap:8px;}
+.birth-row select{
+  flex:1;appearance:none;-webkit-appearance:none;border:1.5px solid #FFD3E0;border-radius:14px;
+  background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M1 1l4 4 4-4' stroke='%23FF5C8A' stroke-width='1.8' fill='none' stroke-linecap='round'/></svg>") no-repeat right 12px center;
+  padding:12px 26px 12px 12px;font-size:15px;color:var(--ink);font-weight:600;text-align:center;cursor:pointer;
+}
+.birth-row select:focus{outline:none;border-color:var(--pink);}
+.birth-shake{animation:shake .45s ease;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}50%{transform:translateX(6px);}75%{transform:translateX(-4px);}}
+.birth-done{display:none;font-size:12px;color:#2A9D8F;font-weight:700;text-align:center;margin-top:10px;}
+
+.energy-card{display:none;margin-top:14px;background:linear-gradient(135deg,#FFF9FB 0%,#FFE9F2 100%);border:1px solid rgba(247,37,133,.14);border-radius:18px;padding:14px 16px;box-shadow:0 8px 24px rgba(247,37,133,.10);text-align:left}
+.energy-card.show{display:block;animation:ecIn .5s cubic-bezier(.2,.7,.3,1) both}
+@keyframes ecIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.ec-main{font-size:22px;font-weight:900;color:#33272A;letter-spacing:.5px;line-height:1.3}
+.ec-main .sym{color:#F72585;font-weight:900;margin-right:4px}
+.ec-row{display:flex;align-items:center;gap:9px;margin-top:10px;flex-wrap:wrap}
+.ec-tag{font-size:13px;font-weight:800;color:#8A5E77;flex:none}
+.ec-nums{display:flex;gap:6px}
+.ec-num{width:31px;height:31px;border-radius:50%;background:linear-gradient(135deg,#FF6FA8,#F72585);color:#fff;font-size:14.5px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(247,37,133,.28)}
+.ec-swatch{width:19px;height:19px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,.75)}
+.ec-colorname{font-size:15px;font-weight:800;color:#33272A}
+.ec-score{display:flex;align-items:center;gap:7px;flex:1;min-width:0}
+.ec-score b{font-size:20px;font-weight:900;color:#F72585;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.ec-bar{flex:1;height:9px;background:#F6E7EC;border-radius:99px;overflow:hidden;min-width:60px}
+.ec-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#FF9EC0,#F72585)}
+.ec-hint{font-size:13.5px;font-weight:800;color:#B23A5F;margin-top:9px;background:rgba(255,255,255,.7);border-radius:10px;padding:5px 11px;display:inline-block}
+.ec-key{margin-top:10px;font-size:14px;font-weight:700;color:#55464B;line-height:1.55;border-top:1px dashed rgba(247,37,133,.2);padding-top:9px}
+.ec-key svg{width:13px;height:13px;color:#F72585;vertical-align:-2px;margin-right:3px}
+
+/* ===== 结果页：星座卡 ===== */
+.astro-card{background:linear-gradient(150deg,#FFF0F4,#E8FFF9);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px;border:1.5px solid rgba(61,214,196,.25);}
+.astro-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.astro-symbol{width:42px;height:42px;border-radius:14px;background:var(--grad);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;flex:none;}
+.astro-title{font-size:16.5px;font-weight:700;color:var(--ink);flex:1;}
+.astro-range{font-size:13px;color:var(--ink-2);}
+.astro-tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 12px;}
+.astro-tags span{font-size:11.5px;font-weight:600;background:rgba(255,255,255,.9);color:var(--pink-deep);border-radius:999px;padding:4px 11px;}
+.astro-body{font-size:14.5px;color:var(--ink);line-height:1.85;}
+.astro-body p{margin-bottom:8px;}
+.astro-body b{color:var(--pink-deep);}
+.astro-match-title{font-size:13px;font-weight:700;color:var(--ink);margin:12px 0 8px;}
+.astro-match-row{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);margin-bottom:5px;}
+.astro-match-name{width:52px;text-align:left;font-weight:600;color:var(--ink);flex:none;}
+.astro-match-track{flex:1;height:7px;border-radius:99px;background:rgba(255,255,255,.95);overflow:hidden;}
+.astro-match-fill{height:100%;border-radius:99px;}
+.astro-match-pct{width:30px;text-align:right;font-weight:700;color:var(--pink-deep);}
+.astro-animal{display:inline-block;margin-top:10px;font-size:12px;font-weight:600;color:#2A9D8F;background:rgba(42,157,143,.1);padding:6px 14px;border-radius:999px;}
+
+/* 结果页头部星座徽章 */
+.astro-badges{display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap;}
+.astro-badges span{font-size:12px;font-weight:700;color:#fff;background:linear-gradient(135deg,#3DD6C4,#2EC4B6);border-radius:999px;padding:5px 14px;letter-spacing:.5px;}
+/* ===== 结果页 ===== */
+.result-capture{
+  background:linear-gradient(180deg,#FFFFFF 0%,#FFF5F7 45%,#F2FFFB 100%);
+  border-radius:30px;padding:30px 22px 26px;margin-top:22px;
+  box-shadow:var(--shadow);position:relative;z-index:1;
+}
+.result-hero{text-align:center;margin-bottom:24px;}
+.result-label{font-size:14.5px;letter-spacing:3px;color:var(--ink-2);margin-bottom:20px;}
+.type-badge{
+  width:96px;height:96px;border-radius:32px;background:var(--grad);
+  margin:0 auto 18px;display:flex;align-items:center;justify-content:center;
+  color:#fff;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif;
+  font-size:46px;box-shadow:var(--shadow-btn);transform:rotate(6deg);
+}
+.type-name{
+  font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif;font-weight:400;
+  font-size:34px;color:var(--ink);letter-spacing:2px;line-height:1.3;
+}
+.type-tagline{
+  display:inline-block;margin-top:14px;font-size:14.5px;color:var(--pink-deep);
+  background:rgba(255,255,255,.92);padding:8px 20px;border-radius:999px;
+  box-shadow:0 4px 14px rgba(247,37,133,.12);
+}
+.hidden-type-line{margin-top:16px;font-size:15px;color:var(--ink-2);}
+.hidden-type-line b{
+  color:#fff;background:var(--grad);padding:3px 12px;border-radius:999px;
+  font-size:12.5px;font-weight:600;letter-spacing:1px;margin:0 2px;
+}
+.type-bars{display:flex;flex-direction:column;gap:7px;margin:18px 2px 4px;}
+.type-bar-row{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--ink-2);}
+.type-bar-name{width:100px;text-align:left;font-weight:500;color:var(--ink);white-space:nowrap;}
+.type-bar-track{flex:1;height:8px;border-radius:99px;background:rgba(255,255,255,.9);overflow:hidden;}
+.type-bar-fill{height:100%;border-radius:99px;width:0;transition:width .9s ease;}
+.type-bar-pct{width:36px;text-align:right;font-weight:700;color:var(--pink-deep);}
+.report-cards{display:flex;flex-direction:column;gap:16px;}
+.rcard{
+  background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:20px 22px;opacity:0;animation:cardIn .5s ease forwards;
+  animation-delay:calc(var(--i)*110ms);
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.rcard-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.rcard-dot{width:10px;height:10px;border-radius:50%;flex:none;}
+.rcard-title{font-size:16.5px;font-weight:700;color:var(--ink);flex:1;}
+.rcard-head .lock-ic{width:17px;height:17px;color:#F3A5BC;}
+.rcard-body{font-size:15px;color:var(--ink);line-height:1.85;}
+.rcard-body p{margin-bottom:10px;}
+.rcard-body p:last-child{margin-bottom:0;}
+.rcard-body ul{list-style:none;}
+.rcard-body li{position:relative;padding-left:20px;margin-bottom:8px;}
+.rcard-body li:last-child{margin-bottom:0;}
+.rcard-body li::before{
+  content:'';position:absolute;left:2px;top:.62em;width:9px;height:9px;
+  border-radius:50%;background:var(--grad);
+}
+.chips{display:flex;flex-wrap:wrap;gap:10px;}
+.chips span{
+  font-size:13.5px;font-weight:500;color:var(--pink-deep);
+  background:linear-gradient(160deg,#FFF0F4,#E6FFFB);padding:8px 16px;border-radius:999px;
+}
+.rcard.locked{cursor:pointer;background:linear-gradient(180deg,#FFFFFF,#FFFBFD);}
+.rcard-locked{
+  border:1.5px dashed #F3C9D8;border-radius:14px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;color:#A9768C;font-size:15px;
+}
+.rcard-locked svg{width:20px;height:20px;color:#F18BAF;flex:none;align-self:flex-start;margin-top:2px;}
+.rcard-locked p{line-height:1.55;}
+.rcard-locked .teaser{color:var(--ink-2);font-size:14px;margin-top:5px;line-height:1.6;}
+.unlock-box{
+  margin-top:20px;background:#fff;border:2px dashed #F5A8C2;border-radius:var(--radius);
+  padding:24px 20px;text-align:center;scroll-margin-top:30px;
+}
+.unlock-box.pulse{animation:pulse .8s ease 2;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(247,37,133,.35);}50%{box-shadow:0 0 0 14px rgba(247,37,133,0);}}
+.unlock-title{display:flex;align-items:center;justify-content:center;gap:8px;font-size:17px;font-weight:700;color:var(--ink);}
+.unlock-title svg{width:18px;height:18px;color:var(--pink);}
+.unlock-desc{font-size:15px;color:var(--ink-2);margin:8px 0 18px;}
+.unlock-desc b{color:var(--pink-deep);}
+.unlock-price{text-align:center;font-size:15.5px;color:#8A5E77;margin:0 0 16px;line-height:1.9;font-weight:500;}
+.unlock-price b{color:#F72585;font-size:17.5px;font-weight:900;}
+.unlock-price span{color:#B23A5F;font-weight:600;}
+.qr-ph{
+  width:140px;height:140px;margin:0 auto 14px;border-radius:18px;
+  background:#fff;border:1.5px dashed #F5A8C2;
+  display:flex;align-items:center;justify-content:center;
+  padding:8px;box-shadow:0 4px 14px rgba(247,37,133,.08);
+}
+.qr-ph img{width:120px;height:120px;border-radius:12px;display:block;}
+.wechat-label{font-size:14px;color:var(--pink-deep);font-weight:500;margin-bottom:10px;}
+.wechat-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px;}
+.wechat-row #wechat-id{font-size:15px;font-weight:700;color:var(--ink);letter-spacing:1px;}
+.copy-btn{
+  border:none;background:var(--grad);color:#fff;font-size:12.5px;font-weight:500;
+  padding:6px 14px;border-radius:999px;
+}
+.unlock-note{font-size:13.5px;color:#A9768C;}
+.unlock-input{display:flex;gap:10px;margin-top:14px;}
+.unlock-input input{
+  flex:1;min-width:0;height:50px;border-radius:999px;border:1.5px solid #F5A8C2;
+  padding:0 18px;font-size:15px;color:var(--ink);outline:none;background:#fff;
+}
+.unlock-input input:focus{border-color:var(--pink);}
+.unlock-btn{
+  flex:none;height:50px;border:none;border-radius:999px;background:var(--grad);
+  color:#fff;font-size:14px;font-weight:700;padding:0 20px;box-shadow:0 8px 18px rgba(247,37,133,.25);
+}
+.unlock-btn:active{transform:scale(.96);}
+.unlock-tip{font-size:14.5px;color:#95757F;margin-top:8px;text-align:left}
+.unlock-hint{font-size:14px;color:#A9768C;margin-top:8px;min-height:18px;}
+
+/* ===== 恋爱小确幸专区 ===== */
+.bless-zone{margin:22px 2px;display:flex;flex-direction:column;gap:14px;}
+.bless-title{display:flex;align-items:center;justify-content:center;gap:8px;font-size:17px;font-weight:700;color:var(--pink-deep);margin-bottom:2px;}
+.bless-title svg{width:20px;height:20px;color:var(--pink);}
+.bless-card{background:rgba(255,255,255,.94);border:1.5px solid rgba(255,143,171,.35);border-radius:22px;box-shadow:0 8px 24px rgba(247,37,133,.08);padding:18px 18px 16px;}
+.bless-card-head{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.bless-ic{width:38px;height:38px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex:none;color:#fff;}
+.bless-ic svg{width:20px;height:20px;}
+.bless-card-head b{font-size:15.5px;color:var(--ink);}
+.bless-sub{font-size:13.5px;color:var(--ink-2);margin-top:2px;}
+.bless-tag{margin-left:auto;font-size:10.5px;font-weight:700;color:#fff;background:linear-gradient(135deg,#FF5C8A,#FF8FAB);border-radius:999px;padding:3px 9px;}
+.bless-body{font-size:13.5px;color:var(--ink);line-height:1.75;background:linear-gradient(150deg,#FFF7F9,#EFFFFB);border-radius:14px;padding:12px 14px;margin-top:10px;}
+.bless-body b{color:var(--pink-deep);}
+.bless-btn{display:block;width:100%;margin-top:12px;border:none;border-radius:14px;padding:12px;font-size:14.5px;font-weight:700;color:#fff;background:linear-gradient(135deg,#FF5C8A,#FF8FAB);cursor:pointer;}
+.bless-btn-grad{background:linear-gradient(135deg,#3DD6C4,#2EC4B6);}
+.bless-btn:active{transform:scale(.97);}
+/* 盲盒 */
+.box-stage{min-height:86px;display:flex;align-items:center;justify-content:center;margin-top:10px;border-radius:14px;background:linear-gradient(150deg,#FFF0F5,#F3FFFB);border:1.5px dashed rgba(255,143,171,.5);padding:10px;}
+.box-closed{font-size:14px;color:var(--ink-2);text-align:center;line-height:1.6;}
+.box-open{animation:boxpop .5s ease;}
+@keyframes boxpop{0%{transform:scale(.6);opacity:0;}60%{transform:scale(1.08);}100%{transform:scale(1);opacity:1;}}
+.box-text{font-size:14.5px;font-weight:600;color:var(--ink);text-align:center;line-height:1.8;}
+.box-text b{color:var(--pink-deep);}
+.box-act{font-size:12px;color:#2A9D8F;font-weight:600;text-align:center;margin-top:6px;}
+/* 情书 */
+.letter-row{display:flex;gap:8px;margin-top:10px;}
+.letter-row input{flex:1;border:1.5px solid #FFD3E0;border-radius:14px;padding:12px;font-size:14px;color:var(--ink);background:#fff;}
+.letter-row input:focus{outline:none;border-color:var(--pink);}
+.letter-row .bless-btn{width:auto;flex:none;margin-top:0;padding:12px 16px;}
+.letter-card{display:none;margin-top:12px;background:linear-gradient(160deg,#FFF1F6,#FDF4E7);border:1.5px solid #FFD3E0;border-radius:16px;padding:18px 16px;text-align:center;}
+.letter-card.on{display:block;animation:boxpop .5s ease;}
+.letter-card .lc-poem{font-size:15px;font-weight:600;color:var(--ink);line-height:2;font-style:italic;}
+.letter-card .lc-sign{font-size:12px;color:var(--pink-deep);font-weight:700;margin-top:8px;}
+.letter-actions{display:flex;gap:8px;margin-top:10px;}
+.letter-actions .bless-btn{margin-top:0;}
+/* 默契 */
+.mate-row{display:flex;gap:8px;margin-top:10px;}
+.mate-row select{flex:1;appearance:none;-webkit-appearance:none;border:1.5px solid #FFD3E0;border-radius:14px;padding:12px;font-size:14px;color:var(--ink);font-weight:600;background:#fff;cursor:pointer;}
+.mate-row .bless-btn{width:auto;flex:none;margin-top:0;padding:12px 16px;}
+.mate-result{display:none;margin-top:12px;background:linear-gradient(150deg,#FFF0F5,#F3FFFB);border-radius:14px;padding:14px;font-size:13.5px;color:var(--ink);line-height:1.8;text-align:center;}
+.mate-result.on{display:block;animation:boxpop .5s ease;}
+.mate-result b{color:var(--pink-deep);}
+.mate-card{background:linear-gradient(150deg,#FFF0F5,#EFFFFB);border:1.5px solid #FFD3E0;border-radius:18px;padding:20px 16px;text-align:center;margin-bottom:12px;}
+.mate-card .mc-title{font-size:15px;font-weight:700;color:var(--ink);}
+.mate-card .mc-badge{font-size:12px;font-weight:700;color:#fff;background:linear-gradient(135deg,#FF5C8A,#FF8FAB);border-radius:999px;padding:4px 12px;display:inline-block;margin:8px 0;}
+.mate-card .mc-line{font-size:13px;color:var(--ink);line-height:1.9;margin-top:6px;}
+.mate-card .mc-wx{font-size:13px;color:var(--ink-2);margin-top:12px;}
+.mate-result .mr-score{font-size:26px;font-weight:900;color:var(--pink-deep);}
+/* 纪念日 */
+.day-mode{display:flex;gap:14px;margin-top:10px;font-size:13.5px;color:var(--ink);}
+.day-mode label{display:flex;align-items:center;gap:5px;cursor:pointer;}
+.day-mode input{accent-color:var(--pink);}
+.day-card{display:none;margin-top:12px;background:linear-gradient(150deg,#FFF0F5,#EFFFFB);border-radius:16px;padding:18px;text-align:center;}
+.day-card.on{display:block;animation:boxpop .5s ease;}
+.day-card .dc-days{font-size:34px;font-weight:900;color:var(--pink-deep);}
+.day-card .dc-txt{font-size:14px;color:var(--ink);margin-top:4px;line-height:1.7;}
+.day-card .dc-date{font-size:13.5px;color:var(--ink-2);margin-top:6px;}
+/* 贴纸 */
+.sticker-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;width:100%;min-width:0;}
+.sticker{aspect-ratio:1;border-radius:18px;padding:14px 12px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 6px 16px rgba(247,37,133,.15);min-width:0;overflow:hidden;}
+.sticker .st-char{font-size:38px;font-weight:900;line-height:1;}
+.sticker .st-name{font-size:15px;font-weight:800;margin-top:2px;}
+.sticker .st-tags{font-size:11.5px;opacity:.92;line-height:1.5;overflow-wrap:break-word;}
+.sticker .st-zodiac{font-size:11.5px;opacity:.85;text-align:right;}
+/* 能量音 */
+.sound-row{display:flex;align-items:center;gap:10px;margin-top:12px;}
+.sound-row .bless-btn{width:auto;flex:none;margin-top:0;padding:12px 20px;}
+.sound-state{font-size:13px;color:#2A9D8F;font-weight:600;}
+.result-actions{display:flex;gap:14px;margin-top:24px;position:relative;z-index:1;}
+.btn{
+  flex:1;height:60px;border-radius:999px;font-size:17px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .15s ease;
+}
+.btn:active{transform:scale(.96);}
+.btn svg{width:20px;height:20px;}
+.btn-primary{background:var(--grad);color:#fff;border:none;box-shadow:var(--shadow-btn);}
+.btn-ghost{background:#fff;color:var(--pink-deep);border:2px solid #FBD5E3;box-shadow:0 6px 18px rgba(247,37,133,.1);}
+.btn-home{
+  width:100%;height:54px;margin-top:12px;border-radius:999px;
+  background:rgba(255,255,255,.9);color:var(--ink-2);border:2px solid #F0DFE7;
+  font-size:15px;font-weight:600;position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  transition:transform .15s ease;
+}
+.btn-home:active{transform:scale(.97);}
+.btn-home svg{width:17px;height:17px;}
+.result-note{font-size:14.5px;color:#A9768C;text-align:center;margin-top:16px;}
+
+/* ===== 弹窗（分享 / 确认） ===== */
+.modal{
+  position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
+  background:rgba(107,33,73,.5);backdrop-filter:blur(6px);padding:24px;
+}
+.modal.active{display:flex;animation:viewIn .3s ease;}
+.modal-card{
+  background:#fff;border-radius:26px;max-width:380px;width:100%;
+  padding:26px 22px 22px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.25);
+  max-height:92vh;overflow:auto;
+}
+.modal-card h3{font-size:18px;color:var(--ink);margin-bottom:16px;font-weight:700;}
+.share-copy{margin-bottom:16px;}
+.share-copy-label{font-size:14px;color:var(--ink-2);margin-bottom:8px;text-align:left;}
+.share-copy-box{
+  background:linear-gradient(160deg,#FFF0F4,#E6FFFB);border-radius:14px;
+  padding:14px 16px;font-size:14px;line-height:1.8;color:var(--ink);
+  text-align:left;margin-bottom:10px;border:1px solid #FFE0EB;
+}
+.share-copy-box span{word-break:break-all;}
+.share-copy .btn{height:48px;font-size:15px;}
+.share-img-wrap{background:var(--grad-soft);border-radius:18px;padding:10px;margin-bottom:16px;overflow:hidden;}
+.share-img-wrap img{width:100%;display:block;border-radius:12px;}
+.modal-card .btn{margin-bottom:12px;text-decoration:none;}
+.modal-card .btn:last-child{margin-bottom:0;}
+.share-hint{font-size:14px;color:var(--ink-2);margin-bottom:16px;line-height:1.7;}
+.confirm-text{font-size:15.5px;color:var(--ink-2);margin:-6px 0 20px;line-height:1.7;}
+.confirm-actions{display:flex;gap:12px;}
+.confirm-actions .btn{margin:0;}
+.confirm-actions .btn-danger{background:#fff;color:var(--pink-deep);border:2px solid #FBD5E3;box-shadow:none;}
+
+/* ===== 轻提示 ===== */
+.toast{
+  position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(20px);
+  background:rgba(107,33,73,.92);color:#fff;font-size:14px;padding:11px 22px;
+  border-radius:999px;opacity:0;pointer-events:none;transition:all .3s ease;z-index:60;
+  white-space:nowrap;box-shadow:0 10px 26px rgba(0,0,0,.2);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-delay:0ms !important;transition-duration:.01ms !important;}
+}
+#top-btn{position:fixed;right:16px;bottom:76px;z-index:999;width:46px;height:46px;border-radius:50%;border:none;background:linear-gradient(135deg,#FF5C8A,#F72585);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(247,37,133,.35);opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease;}
+#top-btn.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+#top-btn svg{width:20px;height:20px;}
+/* ===== 分享卡 3:4（隐藏容器） ===== */
+.share-card-hidden{position:fixed;left:0;top:0;width:750px;height:1334px;z-index:-9999;pointer-events:none}
+.sc1{width:750px;height:1334px;background:#FFF5F7;display:flex;flex-direction:column;overflow:hidden;font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
+.sc1-hero{background:linear-gradient(160deg,#FFE3EC 0%,#FFB6CF 50%,#F72585 140%);padding:20px 44px 16px;text-align:center;color:#fff}
+.sc1-badge{width:100px;height:100px;border-radius:28px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:900;color:#fff;box-shadow:0 10px 24px rgba(190,18,90,.28)}
+.sc1-name{font-size:72px;font-weight:900;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif;letter-spacing:2px}
+.sc1-tag{font-size:40px;margin-top:12px;opacity:.96}
+.sc1-hidden{font-size:40px;margin-top:6px;opacity:.88}
+.sc1-astro{display:inline-block;margin-top:8px;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.5);padding:6px 22px;border-radius:99px;font-size:40px}
+.sc1-body{flex:1;padding:26px 44px 10px;background:#FFF5F7;overflow:hidden}
+.sc1-sec{font-size:42px;font-weight:700;color:#33272A;margin:9px 0 6px}
+.sc1-sec:first-child{margin-top:0}
+.sc1-bar{display:flex;align-items:center;gap:12px;margin-bottom:2px}
+.sc1-bar-name{width:150px;font-size:30px;color:#4A3B40;flex:none;white-space:nowrap}
+.sc1-bar-track{flex:1;height:26px;background:#F6E7EC;border-radius:99px;overflow:hidden}
+.sc1-bar-fill{display:block;height:100%;border-radius:99px}
+.sc1-bar-pct{width:52px;text-align:right;font-size:28px;font-weight:700;color:#F72585}
+.sc1-p{font-size:33px;line-height:1.6;color:#4A3B40}
+.sc1-adv{font-size:38px;line-height:1.45;color:#55464B}
+.sc1-adv ul{list-style:none;padding:0;margin:0}
+.sc1-adv li{margin-bottom:16px}
+.sc1-foot{flex:none;background:linear-gradient(135deg,#FFE3EC,#FFB6CF);padding:20px 44px 24px;text-align:center}
+.sc1-unlock-bar{background:linear-gradient(135deg,#FF8FB8,#F72585);color:#fff;font-size:38px;font-weight:700;text-align:center;padding:16px 14px;margin:14px 18px 0;border-radius:12px;letter-spacing:.5px;line-height:1.4}
+.sc1-line{font-size:38px;font-weight:700;color:#F72585}
+.sc1-qr{width:150px;height:150px;background:#fff;border-radius:20px;margin:14px auto 0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.sc1-qr img{width:134px;height:134px;object-fit:contain}
+.sc1-word{font-size:46px;font-weight:800;color:#F72585;margin-top:14px;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.sc1-cta{font-size:38px;font-weight:700;color:#33272A;margin-top:12px}
+/* 小确幸卡 */
+.sc2{width:750px;height:1334px;background:linear-gradient(180deg,#FFF5F7 0%,#FFE3EC 60%,#FFD3E0 100%);display:flex;flex-direction:column;overflow:hidden;font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;text-align:center}
+.sc2-title{font-size:58px;font-weight:900;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif;color:#F72585;margin-top:40px}
+.sc2-sub{font-size:34px;color:#6E5A62;margin-top:8px}
+.sc2-stickers{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:28px 38px 0}
+.sc2-st{border-radius:18px;padding:20px 10px 14px;color:#fff;display:flex;flex-direction:column;align-items:center}
+.sc2-st-tags{font-size:30px;margin-bottom:8px;opacity:.95}
+.sc2-st-char{font-size:58px;font-weight:900}
+.sc2-st-name{font-size:32px;margin-top:6px}
+.sc2-st-zn{font-size:30px;margin-top:6px;opacity:.85}
+.sc2-box{flex:1;margin:26px 36px 0;background:rgba(255,255,255,.85);border-radius:18px;padding:22px 26px;display:flex;flex-direction:column;justify-content:center}
+.sc2-box-t{font-size:34px;font-weight:700;color:#F72585}
+.sc2-box-text{font-size:38px;line-height:1.45;color:#33272A;margin-top:10px;font-weight:600}
+
+/* ===== 解锁分享卡 ②③④⑤ ===== */
+.sc2b{display:flex;flex-direction:column;height:100%;background:linear-gradient(180deg,#FFF9FB,#FFF0F5)}
+.sc2b-head{margin:30px 34px 0;background:linear-gradient(135deg,#FF6FA8,#F72585);color:#fff;border-radius:16px;padding:14px 20px;text-align:center;font-size:40px;font-weight:900;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.sc2b-body{margin:18px 34px 0;font-size:34px;line-height:1.62;color:#55464B;font-weight:500}
+.sc2b-body p{margin:0 0 14px}
+.sc2b-sec{font-size:38px;font-weight:800;color:#33272A;margin:18px 34px 0}
+.sc2b-adv{margin:8px 34px 0;font-size:36px;line-height:1.5;color:#55464B}
+.sc2b-adv ul{list-style:none;padding:0;margin:0}
+.sc2b-adv li{margin-bottom:12px;padding-left:26px;position:relative}
+.sc2b-adv li::before{content:'';position:absolute;left:2px;top:14px;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#FF6FA8,#F72585)}
+.sc2b-quote{margin:18px 34px 0;background:linear-gradient(135deg,#FFE3EC,#FFB6CF);border-radius:16px;padding:14px 18px;font-size:34px;font-weight:800;color:#B23A5F;line-height:1.5;text-align:center}
+.sc3{display:flex;flex-direction:column;height:100%;background:linear-gradient(180deg,#F9F5FF,#F0E7FF)}
+.sc3-head{margin:30px 34px 0;background:linear-gradient(135deg,#B79CFF,#7C6CF6);color:#fff;border-radius:16px;padding:14px 20px;text-align:center;font-size:40px;font-weight:900;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.sc3-match{margin:18px 34px 0;font-size:34px;line-height:1.55;color:#4A3B40;font-weight:700}
+.sc3-detail{margin:10px 34px 0;font-size:32px;line-height:1.6;color:#6E5A62}
+.sc3-sec{font-size:38px;font-weight:800;color:#33272A;margin:18px 34px 0}
+.sc3-tips{margin:8px 34px 0}
+.sc3-tips p{margin:0 0 12px;font-size:33px;line-height:1.5;color:#55464B;font-weight:500;padding-left:24px;position:relative}
+.sc3-tips p::before{content:'';position:absolute;left:2px;top:13px;width:8px;height:8px;border-radius:50%;background:#7C6CF6}
+.sc3-love{margin:18px 34px 0;background:linear-gradient(135deg,#7C6CF6,#B79CFF);border-radius:16px;padding:16px 18px;color:#fff;font-size:34px;font-weight:800;line-height:1.55;text-align:center}
+.sc4{display:flex;flex-direction:column;height:100%;background:linear-gradient(180deg,#FFF5F7,#FFE3EC)}
+.sc4-head{margin:30px 34px 0;background:linear-gradient(135deg,#F72585,#B23A5F);color:#fff;border-radius:16px;padding:14px 20px;text-align:center;font-size:40px;font-weight:900;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.sc4-warn{margin:12px 34px 0;background:rgba(255,255,255,.85);border:1px solid rgba(247,37,133,.16);border-radius:14px;padding:12px 16px;font-size:32px;line-height:1.5;color:#55464B;font-weight:600}
+.sc4-sec{font-size:38px;font-weight:800;color:#33272A;margin:16px 34px 0}
+.sc4-bar{display:flex;align-items:center;gap:12px;margin:8px 34px 0}
+.sc4-bar-name{width:150px;font-size:28px;color:#4A3B40;flex:none;font-weight:700;white-space:nowrap}
+.sc4-bar-track{flex:1;height:20px;background:#F6E7EC;border-radius:99px;overflow:hidden}
+.sc4-bar-fill{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#FF9EC0,#F72585)}
+.sc4-bar-pct{width:46px;text-align:right;font-size:26px;font-weight:800;color:#F72585}
+.sc4-horo{margin:8px 34px 0;font-size:32px;line-height:1.6;color:#6E5A62}
+.sc5{display:flex;flex-direction:column;height:100%;background:linear-gradient(180deg,#FFF9FB,#FFE9F2)}
+.sc5-title{margin:34px 34px 0;text-align:center;font-size:42px;font-weight:900;color:#F72585;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.sc5-sub{margin:8px 34px 0;text-align:center;font-size:30px;color:#8A5E77;font-weight:700}
+.sc5-days{margin:22px 36px 0}
+.sc5-day{display:flex;align-items:center;gap:14px;margin-bottom:14px;background:rgba(255,255,255,.88);border-radius:14px;padding:10px 14px}
+.sc5-badge{width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,#FF6FA8,#F72585);color:#fff;font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;flex:none;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.sc5-txt{font-size:33px;font-weight:600;color:#4A3B40;line-height:1.45}
+.sc5-quote{margin:14px 36px 0;text-align:center;font-size:34px;font-weight:800;color:#B23A5F;line-height:1.5}
+.sc6{display:flex;flex-direction:column;height:100%;background:linear-gradient(180deg,#FFF5F7,#FFE9F2)}
+.sc6-head{margin:30px 34px 0;background:linear-gradient(135deg,#FF6FA8,#F72585);color:#fff;border-radius:16px;padding:14px 20px;text-align:center;font-size:40px;font-weight:900;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.sc6-match{margin:16px 34px 0;font-size:34px;font-weight:800;color:#B23A5F;line-height:1.5;text-align:center}
+.sc6-match b{color:#F72585}
+.sc6-sec{font-size:38px;font-weight:800;color:#33272A;margin:16px 34px 0}
+.sc6-common{margin:6px 34px 0}
+.sc6-common p{margin:0 0 10px;font-size:33px;line-height:1.5;color:#55464B;font-weight:600;padding-left:26px;position:relative}
+.sc6-common p::before{content:'';position:absolute;left:2px;top:13px;width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,#FF6FA8,#F72585)}
+.sc6-tips{margin:6px 34px 0}
+.sc6-tips p{margin:0 0 12px;font-size:32px;line-height:1.5;color:#4A3B40;font-weight:600;padding-left:24px;position:relative}
+.sc6-tips p::before{content:'';position:absolute;left:2px;top:12px;width:9px;height:9px;border-radius:50%;background:#F72585}
+.sc6-delight{margin:6px 34px 0;background:linear-gradient(135deg,#FFF3F7,#FFE3EC);border-radius:16px;padding:14px 18px}
+.sc6-delight p{margin:0 0 8px;font-size:33px;line-height:1.5;color:#B23A5F;font-weight:800}
+.sc6-delight p:last-child{margin:0}
+.sc6-love{margin:16px 34px 0;text-align:center;font-size:34px;font-weight:800;color:#F72585;line-height:1.5}
+.sc6-lock{margin:20px 34px 0;background:linear-gradient(135deg,#FFF3F7,#FFE3EC);border:1px dashed rgba(247,37,133,.4);border-radius:16px;padding:22px 18px;text-align:center}
+.sc6-lock-ic{width:64px;height:64px;margin:0 auto 12px;border-radius:18px;background:linear-gradient(135deg,#FF6FA8,#F72585);display:flex;align-items:center;justify-content:center;color:#fff}
+.sc6-lock-ic svg{width:34px;height:34px}
+.sc6-lock-t{font-size:36px;font-weight:900;color:#B23A5F}
+.sc6-lock-sub{margin-top:10px;font-size:30px;line-height:1.5;color:#8A5E77;font-weight:600}
+.sc1-kw .chips span.sc1-lucky{background:linear-gradient(135deg,#FFF0F5,#FFE3EC);color:#F72585;border:1.5px solid rgba(247,37,133,.3)}
+.sc1-kw{margin-top:2px}
+.sc1-kw .chips{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0}
+.sc1-kw .chips span{background:#F6E7EC;color:#8A5E77;border-radius:99px;padding:8px 16px;font-size:28px;font-weight:800}
+.sc1-match{margin-top:2px;font-size:34px;line-height:1.5;color:#B23A5F;font-weight:800}
+
+/* ===== 保存完整报告 ===== */
+.report-save-btn{width:100%;margin:0 0 18px;padding:14px;font-size:18px;border-radius:16px;box-shadow:0 6px 18px rgba(247,37,133,.25)}
+.rp-wrap{width:750px;background:#FFF5F7}
+.rp1{width:750px;background:linear-gradient(180deg,#FFF5F7,#FFE9F2)}
+.rp-hero{text-align:center;padding:18px 24px 2px}
+.rp-hero .result-label{font-size:22px;color:#F72585;font-weight:800;letter-spacing:2px}
+.rp-hero .type-badge{width:106px;height:106px;font-size:46px;margin:10px auto 6px;border-radius:26px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.rp-hero .type-name{font-size:38px;color:#33272A;font-weight:900;margin:0;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.rp-hero .type-tagline{font-size:20px;color:#8A5E77;margin-top:4px;line-height:1.5}
+.rp-hero .hidden-type-line{font-size:19px;color:#B23A5F;font-weight:700;margin-top:4px}
+.rp-hero .astro-badges{font-size:19px;color:#F72585;font-weight:700;margin-top:4px}
+.rp-hero .type-bars{max-width:560px;margin:10px auto 0}
+.rp-hero .type-bars .type-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.rp-hero .type-bars .type-bar-name{width:150px;font-size:17px;font-weight:700;color:#4A3B40;flex:none;white-space:nowrap}
+.rp-hero .type-bars .type-bar-track{flex:1;height:14px;background:#F6E7EC;border-radius:99px;overflow:hidden;display:block}
+.rp-hero .type-bars .type-bar-fill{display:block;height:100%;border-radius:99px}
+.rp-hero .type-bars .type-bar-pct{width:56px;text-align:right;font-size:17px;font-weight:800;color:#F72585;flex:none}
+.rp-energy{margin:20px 34px 0;background:rgba(255,255,255,.9);border:1px solid #F7E3EA;border-radius:20px;padding:20px 22px}
+.rp-en-title{font-size:28px;font-weight:900;color:#F72585;text-align:center;margin-bottom:14px}
+.rp-en-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:24px;color:#55464B}
+.rp-en-tag{width:120px;flex:none;font-size:23px;color:#8A5E77;font-weight:700}
+.rp-en-nums{display:flex;gap:10px}
+.rp-en-nums i{font-style:normal;background:linear-gradient(135deg,#FF6FA8,#F72585);color:#fff;border-radius:12px;min-width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:900}
+.rp-en-swatch{width:34px;height:34px;border-radius:10px;flex:none}
+.rp-en-cn{font-size:24px;font-weight:700;color:#4A3B40}
+.rp-en-score{font-size:24px;color:#4A3B40}
+.rp-en-score b{color:#F72585;font-size:27px}
+.rp-en-bar{flex:1;height:16px;background:#F6E7EC;border-radius:99px;overflow:hidden}
+.rp-en-bar i{display:block;height:100%;background:linear-gradient(90deg,#FF9EC0,#F72585)}
+.rp-en-hint{margin-top:12px;font-size:23px;line-height:1.6;color:#8A5E77;background:#FFF3F7;border-radius:12px;padding:10px 14px}
+.rp-en-key{margin-top:12px;font-size:24px;font-weight:800;color:#B23A5F;line-height:1.5}
+.rp2{width:750px;background:linear-gradient(180deg,#FFF9FB,#FFF0F5)}
+.rp2-title{font-size:36px;font-weight:900;color:#F72585;text-align:center;padding:30px 0 8px;font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.rp2-sub{font-size:24px;color:#8A5E77;text-align:center;padding:0 30px 18px;line-height:1.6}
+.rp2-cards{padding:0 26px 6px}
+.rp2-cards .rcard{width:100%;margin:0 0 18px;padding:22px 24px;border-radius:20px;box-shadow:none;border:1px solid #F7E3EA;background:#fff;opacity:1!important;animation:none!important;animation-delay:0ms!important}
+.rp2-cards .rcard-head{margin-bottom:14px}
+.rp2-cards .rcard-dot{width:14px;height:14px}
+.rp2-cards .rcard-title{font-size:26px}
+.rp2-cards .rcard-body{font-size:23px;line-height:1.8}
+.rp2-cards .rcard-body li{padding-left:26px;margin-bottom:12px}
+.rp2-cards .rcard-body li::before{width:8px;height:8px;top:9px}
+#report-previews .share-img-wrap{max-height:56vh;overflow:auto}
+#report-modal .modal-card{max-height:88vh;overflow-y:auto}
+
+
+/* 分享弹窗两张图 */
+.share-img-cap{font-size:13px;font-weight:700;color:#F72585;text-align:left;margin:0 2px 8px}
+.share-img-cap:first-of-type{margin-top:4px}
+.bless-lock{font-size:16px;color:#95757F;background:#FBF3F6;border:1px dashed #F3C9D8;border-radius:12px;padding:12px 14px;text-align:center;line-height:1.7}
+/* 分享图放大预览 */
+.viewer{position:fixed;inset:0;z-index:99;display:none;align-items:center;justify-content:center;background:rgba(20,5,12,.88);flex-direction:column;padding:20px;}
+.viewer.active{display:flex;}
+.viewer img{max-width:92vw;max-height:82vh;border-radius:14px;box-shadow:0 18px 60px rgba(0,0,0,.5);}
+.viewer-close{position:fixed;top:14px;right:20px;width:44px;height:44px;border-radius:50%;border:none;background:#fff;color:#B23A5F;font-size:26px;line-height:1;cursor:pointer;z-index:100;}
+.viewer-hint{color:#F3D3DE;font-size:13px;margin-top:16px;}
+</style>
+</head>
+<body>
+<div id="app" class="app">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- ===== 视图：首页 ===== -->
+  <section id="view-home" class="view active">
+    <div class="home-inner">
+      <svg class="float-heart fh-1" viewBox="0 0 24 24" fill="#FF5C8A"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <svg class="float-heart fh-2" viewBox="0 0 24 24" fill="#3DD6C4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <svg class="float-heart fh-3" viewBox="0 0 24 24" fill="#FFB3C6"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <svg class="float-heart fh-4" viewBox="0 0 24 24" fill="#F72585"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <div class="logo-badge">
+        <svg viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+      <h1>测一测你的<br>恋爱人格</h1>
+      <p class="subtitle">先填生日 + 20 道情景题 · 3 分钟<br>星座能量·隐藏人性 三合一测出你</p>
+      <div class="birth-card" id="birth-card">
+        <div class="birth-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>先输入出生日期，测试更准</div>
+        <div class="birth-sub">结合星座 + 生肖能量，匹配更精准</div>
+        <div class="birth-row">
+          <select id="b-year" onchange="fillDays();energyCard()"><option value="">年</option></select>
+          <select id="b-month" onchange="fillDays();energyCard()"><option value="">月</option></select>
+          <select id="b-day" onchange="energyCard()"><option value="">日</option></select>
+        </div>
+        <div class="energy-card" id="energy-card" aria-live="polite"></div>
+      </div>
+      <button id="btn-start" class="btn-start" onclick="startTest()">开始测试</button>
+      <div class="home-tags">
+        <span>小奶糖</span><span>暖心大白</span><span>人间清醒</span><span>野猫系</span><span>小太阳</span><span>靠谱担当</span>
+      </div>
+      <p class="home-note">6 人格 × 12 星座 × 12 生肖 · 附完整避坑指南 · 测完可分享朋友圈</p>    </div>
+  </section>
+
+  <!-- ===== 视图：答题页 ===== -->
+  <section id="view-quiz" class="view">
+    <div class="quiz-top">
+      <button id="btn-back" class="icon-btn" onclick="goBack()" aria-label="返回上一题">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="progress-wrap">
+        <div class="progress-text">第 <b id="q-count">1</b> / 20 题</div>
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+      </div>
+      <button class="link-home" onclick="askGoHome()">返回首页</button>
+    </div>
+    <p class="quiz-tip">选完自动下一题 · 可返回修改</p>
+    <div id="q-stage" class="q-stage">
+      <div class="q-badge" id="q-badge">Q1</div>
+      <h2 class="q-text" id="q-text"></h2>
+      <div class="q-options" id="q-options"></div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：结果页 ===== -->
+  <section id="view-result" class="view">
+    <div id="result-capture" class="result-capture">
+      <button class="btn btn-primary report-save-btn" id="save-report-btn" style="display:none" onclick="saveReport()">保存完整报告</button>
+<div class="result-hero">
+        <div class="result-label">你的恋爱人格是</div>
+        <div class="type-badge" id="type-badge">糖</div>
+        <h2 class="type-name" id="type-name">小奶糖</h2>
+        <p class="type-tagline" id="type-tagline"></p>
+        <div class="hidden-type-line" id="hidden-type"></div>
+        <div class="astro-badges" id="astro-badges"></div>
+        <div class="type-bars" id="type-bars"></div>
+      </div>
+      <div class="report-cards" id="report-cards"></div>
+
+<!-- ===== 恋爱小确幸专区 ===== -->
+<div class="bless-zone" id="bless-zone">
+  <div class="bless-title">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <span>恋爱小确幸 · 专属于你</span>
+  </div>
+
+  <div class="bless-card">
+    <div class="bless-card-head"><span class="bless-ic" style="background:linear-gradient(135deg,#FF9EB5,#FF5C8A)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8a1 1 0 0 1 1-1h0a1 1 0 0 1 1 1v1h1a1 1 0 0 1 1 1v0a1 1 0 0 1-1 1h-1v1a1 1 0 0 1-1 1h0a1 1 0 0 1-1-1v-1h-1a1 1 0 0 1-1-1v0a1 1 0 0 1 1-1h1z"/><path d="M12 20.94c-1.5 1.26-4 1.06-5.5 0C3 18.5 1 14 1 9.5A5.5 5.5 0 0 1 6.5 4c1.7 0 3.3.74 4.5 2 .9 1.06 3.4 1.06 4.5-2 .5-.2 1.1-.3 1.7-.3"/></svg></span>
+      <div><b>情侣首饰 · 为你定制</b><p class="bless-sub">按你的恋爱人格挑选专属搭配</p></div>
+    </div>
+    <div class="bless-body" id="jewelry-body"></div>
+    <button class="bless-btn" id="jewel-btn" onclick="buyTip()">get 同款 · 私信我</button>
+  </div>
+
+  <div class="bless-card">
+    <div class="bless-card-head"><span class="bless-ic" style="background:linear-gradient(135deg,#3DD6C4,#2EC4B6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4.5 5v7c0 5.2 3.2 8.6 7.5 10 4.3-1.4 7.5-4.8 7.5-10V5z"/><path d="m9 12 2 2 4-4"/></svg></span>
+      <div><b>能量磁场 · 提升方案</b><p class="bless-sub">幸运色 · 能量石 · 香调 · 佩戴方位</p></div>
+    </div>
+    <div class="bless-body" id="field-body"></div>
+    <button class="bless-btn" id="field-btn" onclick="buyTip()">get 能量物 · 私信我</button>
+  </div>
+
+  <div class="bless-card">
+    <div class="bless-card-head"><span class="bless-ic" style="background:linear-gradient(135deg,#FFC98A,#FF8FAB)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v13h18z"/><path d="M3 8h18"/><path d="M12 3v18"/><path d="m8 15 2 2 4-4"/></svg></span>
+      <div><b>今日恋爱盲盒</b><p class="bless-sub">每日一个小确幸，开出一个专属于你的暖心情话</p></div>
+      <span class="bless-tag">每日 1 个</span>
+    </div>
+    <div class="box-stage" id="box-stage"><p class="box-closed">今天的惊喜还没拆开<br>点下方按钮，开一个恋爱小确幸</p></div>
+    <button class="bless-btn bless-btn-grad" id="box-btn" onclick="openBox()">开启今日盲盒</button>
+  </div>
+
+  <div class="bless-card">
+    <div class="bless-card-head"><span class="bless-ic" style="background:linear-gradient(135deg,#FFB6C1,#F72585)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 8 6 8-6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg></span>
+      <div><b>为 TA 写三行情书</b><p class="bless-sub">输入 TA 的名字，生成一首只属于你们的诗</p></div>
+    </div>
+    <div class="letter-row"><input id="letter-name" maxlength="6" placeholder="TA 的名字（2-4 字）" autocomplete="off"><button class="bless-btn" onclick="makeLetter()">生成情书</button></div>
+    <div class="letter-card" id="letter-card"></div>
+    <div class="letter-actions" id="letter-actions"></div>
+  </div>
+
+  <div class="bless-card">
+    <div class="bless-card-head"><span class="bless-ic" style="background:linear-gradient(135deg,#7FC8F8,#4A90D9)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+      <div><b>情侣默契挑战</b><p class="bless-sub">邀请 TA 一起测，测完互换人格，看看你们有多合</p></div>
+    </div>
+    <button class="bless-btn" onclick="openMate()">生成默契邀请卡</button>
+    <div class="mate-row">
+      <select id="mate-type"><option value="sweet">小奶糖</option><option value="warm">暖心大白</option><option value="rational">人间清醒</option><option value="free">野猫系</option><option value="sunny">小太阳</option><option value="rock">靠谱担当</option></select>
+      <button class="bless-btn" onclick="calcMate()">算默契值</button>
+    </div>
+    <div class="mate-result" id="mate-result"></div>
+  </div>
+
+  <div class="bless-card">
+    <div class="bless-card-head"><span class="bless-ic" style="background:linear-gradient(135deg,#F3B4C8,#D46AA0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+      <div><b>恋爱纪念日挂件</b><p class="bless-sub">已相爱多少天，或距离目标还有多少天</p></div>
+    </div>
+    <div class="day-mode">
+      <label><input type="radio" name="daymode" value="together" checked>已在一起</label>
+      <label><input type="radio" name="daymode" value="countdown">距目标日</label>
+    </div>
+    <div class="letter-row"><input id="day-input" type="date"><button class="bless-btn" onclick="calcDay()">生成挂件</button></div>
+    <div class="day-card" id="day-card"></div>
+  </div>
+
+  <div class="bless-card">
+    <div class="bless-card-head"><span class="bless-ic" style="background:linear-gradient(135deg,#FF8FAB,#FF5C8A)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"/><path d="M12 4v8"/><path d="m8 9 4-5 4 5"/><path d="M3 16h18"/></svg></span>
+      <div><b>专属恋爱贴纸</b><p class="bless-sub">你的「人格 × 星座」专属贴纸，可保存发朋友圈</p></div>
+    </div>
+    <div class="sticker-grid" id="sticker-grid"></div>
+    <button class="bless-btn" onclick="saveSticker()">生成贴纸图保存</button>
+  </div>
+
+  <div class="bless-card">
+    <div class="bless-card-head"><span class="bless-ic" style="background:linear-gradient(135deg,#7FD8BE,#2A9D8F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+      <div><b>15 秒恋爱能量音</b><p class="bless-sub">戴上耳机，闭眼深呼吸 3 次，给自己 15 秒充电</p></div>
+    </div>
+    <div class="sound-row"><button class="bless-btn bless-btn-grad" id="sound-btn" onclick="playSound()">播放能量音</button><span class="sound-state" id="sound-state"></span></div>
+  </div>
+</div>
+
+      <div id="unlock-box" class="unlock-box">
+        <div class="unlock-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>完整恋爱报告解锁</span>
+        </div>
+        <p class="unlock-desc">已免费解锁 <b>3</b> 条，剩余 <b>6</b> 条专属解读待解锁</p>
+        <p class="unlock-price"><b>5.20 元</b> · 一杯奶茶的价格<br>解锁剩下的全部专属解读，<span>懂自己，是最值得的浪漫</span></p>
+        <div class="unlock-guide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F72585" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;margin:0 auto 6px;display:block"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <p class="wechat-label">点下方商品卡拍下 · 私信发你专属解锁码</p>
+          <p class="unlock-note">① 点笔记下方商品卡拍下 → ② 私信收解锁码 → ③ 输入解锁全部 5 条专属解读</p>
+        </div>
+        <div class="unlock-input">
+          <input id="unlock-code" type="text" maxlength="12" placeholder="输入解锁口令" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')" onkeydown="if(event.key==='Enter')unlockReport()">
+          <button class="unlock-btn" onclick="unlockReport()">解锁完整报告</button>
+        </div>
+        <p class="unlock-tip">口令不含空格，建议复制后直接粘贴，手输更稳</p>
+        <p class="unlock-hint" id="unlock-hint"></p>
+      </div>
+    </div>
+    <div class="result-actions">
+      <button id="btn-share" class="btn btn-primary" onclick="shareResult()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        分享朋友圈
+      </button>
+      <button id="btn-retry" class="btn btn-ghost" onclick="retryTest()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        重新测试
+      </button>
+    </div>
+    <button class="btn-home" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V20a1.5 1.5 0 0 1-1.5 1.5H15v-6h-6v6H4.5A1.5 1.5 0 0 1 3 20z"/></svg>
+      返回首页
+    </button>
+    <p class="result-note">本测评仅供娱乐参考 · 感情没有标准答案</p>
+  </section>
+</div>
+
+
+<!-- ===== 情侣默契邀请弹窗 ===== -->
+<div id="mate-modal" class="modal">
+  <div class="modal-card">
+    <h3>情侣默契邀请卡</h3>
+    <div class="mate-card" id="mate-card"></div>
+    <div id="mate-preview" style="display:none;margin-top:12px;text-align:center;">
+      <div class="share-copy-label">图片已生成，长按下方图片保存到相册</div>
+      <img id="mate-preview-img" alt="邀请卡预览" style="width:62%;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.1);">
+    </div>
+    <p class="share-copy-label">邀请文案（点复制，直接发给 TA）</p>
+    <div class="share-copy-box"><span id="mate-text"></span></div>
+    <div class="letter-actions" style="margin-top:12px;">
+      <button class="btn btn-primary" onclick="copyMateText()">复制邀请文案</button>
+      <button class="btn btn-primary" onclick="saveMateCard()">生成邀请卡保存</button>
+      <button class="btn btn-ghost" onclick="closeAny('mate-modal')">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 分享朋友圈弹窗 ===== -->
+<div id="share-modal" class="modal">
+  <div class="modal-card">
+    <h3>分享到朋友圈</h3>
+    <div class="share-copy">
+      <p class="share-copy-label">分享文案（已为你写好，30-50字）</p>
+      <div class="share-copy-box"><span id="share-text"></span></div>
+      <button class="btn btn-primary" onclick="copyShareText()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        复制文案
+      </button>
+    </div>
+    <p class="share-hint">电脑：点下方按钮保存；<br>手机：长按图片保存到相册，文案 + 图片一起发朋友圈</p>
+    <div id="share-previews"></div>
+    <button class="btn btn-ghost" onclick="closeModal()">关闭</button>
+  </div>
+</div>
+<!-- ===== 完整报告保存弹窗 ===== -->
+<div id="report-modal" class="modal">
+  <div class="modal-card">
+    <h3>完整报告</h3>
+    <p class="confirm-text">已生成 2 张报告图，保存后慢慢看<br>手机长按图片保存 · 电脑点下方按钮下载</p>
+    <div id="report-previews"></div>
+    <button class="btn btn-ghost" onclick="closeReportModal()">关闭</button>
+  </div>
+</div>
+
+<!-- ===== 分享图放大预览 ===== -->
+<div id="share-viewer" class="viewer">
+  <img id="share-viewer-img" alt="分享图大图">
+  <button class="viewer-close" onclick="closeShareViewer()">×</button>
+  <p class="viewer-hint">双指可放大看细节 · 手机长按保存到相册 · 电脑右键另存为</p>
+</div>
+<!-- ===== 返回确认弹窗 ===== -->
+<div id="confirm-modal" class="modal">
+  <div class="modal-card">
+    <h3>返回首页？</h3>
+    <p class="confirm-text">当前答题进度将被清空，<br>确定要离开吗？</p>
+    <div class="confirm-actions">
+      <button class="btn btn-danger" onclick="confirmLeave(true)">确定返回</button>
+      <button class="btn btn-primary" onclick="confirmLeave(false)">继续答题</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ===== 题库：20 道情景题，每道 4 个选项，对应 4 种人格 ===== */
+const QUESTIONS = [
+  {
+    text: "对象深夜发来一句「睡了吗」，你会？",
+    options: [
+      { text: "秒回陪聊，能聊到天亮", t: "sweet" },
+      { text: "先忙完手头的事，再认真回", t: "warm" },
+      { text: "明天再回，深夜不聊太嗨", t: "rational" },
+      { text: "看心情，想回就回", t: "free" }
+    ]
+  },
+  {
+    text: "约会完各自回家，你希望？",
+    options: [
+      { text: "回家继续聊，消息不断", t: "sweet" },
+      { text: "约好下一次见面，心里踏实", t: "warm" },
+      { text: "各自安好，不过度腻歪", t: "rational" },
+      { text: "有缘再约，不必刻意", t: "free" }
+    ]
+  },
+  {
+    text: "对象一整天没联系你，你的内心戏是？",
+    options: [
+      { text: "坐立难安，脑补各种可能", t: "sweet" },
+      { text: "担心 ta 是不是出了什么事", t: "warm" },
+      { text: "ta 忙完自然会找我", t: "rational" },
+      { text: "我也玩我的，根本没注意", t: "free" }
+    ]
+  },
+  {
+    text: "对象随口说想吃某家店的甜品，你会？",
+    options: [
+      { text: "默默记下，找机会带 ta 去", t: "warm" },
+      { text: "当场约明天就去", t: "sweet" },
+      { text: "下次纪念日再去更有仪式感", t: "rational" },
+      { text: "顺路就买，不顺路就算", t: "free" }
+    ]
+  },
+  {
+    text: "对象情绪低落时，你的第一反应是？",
+    options: [
+      { text: "安静陪着，给 ta 做点好吃的", t: "warm" },
+      { text: "讲个笑话逗 ta 开心", t: "sunny" },
+      { text: "给 ta 空间，等 ta 想说了再听", t: "rational" },
+      { text: "带 ta 出门散散心", t: "free" }
+    ]
+  },
+  {
+    text: "住在一起后家务怎么分？",
+    options: [
+      { text: "我多做点，让 ta 轻松些", t: "warm" },
+      { text: "轮流来，公平最重要", t: "rational" },
+      { text: "谁有空谁做，别计较", t: "free" },
+      { text: "一起做，顺便黏在一起", t: "sweet" }
+    ]
+  },
+  {
+    text: "对象规划未来却没提到你，你会？",
+    options: [
+      { text: "冷静谈一次，把自己的位置说清", t: "rational" },
+      { text: "默默观察，看 ta 之后怎么做", t: "warm" },
+      { text: "直接问 ta 打算怎么安排我", t: "sweet" },
+      { text: "不纠结，过好当下最重要", t: "free" }
+    ]
+  },
+  {
+    text: "朋友都劝你分手，你会？",
+    options: [
+      { text: "列事实、复盘，自己判断", t: "rational" },
+      { text: "相信自己的感觉，不轻易动摇", t: "sunny" },
+      { text: "先听听对象怎么说", t: "warm" },
+      { text: "分就分，不拖泥带水", t: "free" }
+    ]
+  },
+  {
+    text: "纪念日对象忘得一干二净，你会？",
+    options: [
+      { text: "平心静气提一次，不翻旧账", t: "rational" },
+      { text: "有点失望，但嘴上说没事", t: "warm" },
+      { text: "用撒娇提醒 ta，给个台阶", t: "sweet" },
+      { text: "其实不太在意这些形式", t: "free" }
+    ]
+  },
+  {
+    text: "对象开始查你行程、翻你手机，你会？",
+    options: [
+      { text: "觉得被束缚，想逃开", t: "free" },
+      { text: "理解 ta 没安全感，多报备点", t: "warm" },
+      { text: "坐下来谈边界，一次立好规矩", t: "rational" },
+      { text: "反而更黏 ta，让 ta 放心", t: "sweet" }
+    ]
+  },
+  {
+    text: "恋爱久了觉得平淡，你会？",
+    options: [
+      { text: "找点新玩法，让关系保持新鲜", t: "free" },
+      { text: "用心制造小惊喜，重新点燃", t: "sunny" },
+      { text: "一起定个新目标，往前走", t: "rock" },
+      { text: "接受平淡才是常态", t: "warm" }
+    ]
+  },
+  {
+    text: "被朋友问起「你对象呢？」，你会？",
+    options: [
+      { text: "随缘回答，不细说", t: "free" },
+      { text: "大方分享，顺便撒把糖", t: "sunny" },
+      { text: "聊聊我们未来的计划", t: "rock" },
+      { text: "说 ta 对我很好", t: "sweet" }
+    ]
+  },
+  {
+    text: "对象心情不好，你会先做什么？",
+    options: [
+      { text: "讲个段子逗 ta 笑", t: "sunny" },
+      { text: "抱抱 ta，安静陪着", t: "warm" },
+      { text: "帮 ta 分析问题出在哪", t: "rational" },
+      { text: "带 ta 去吃顿好的", t: "free" }
+    ]
+  },
+  {
+    text: "朋友聚会上，你通常是？",
+    options: [
+      { text: "气氛担当，全场最嗨", t: "sunny" },
+      { text: "安静观察，默默照顾大家", t: "warm" },
+      { text: "主导话题，控场高手", t: "rational" },
+      { text: "随性加入，不抢戏", t: "free" }
+    ]
+  },
+  {
+    text: "对象说你「太幼稚了」，你会？",
+    options: [
+      { text: "哈哈一笑，继续闹", t: "sunny" },
+      { text: "有点失落，想收敛一点", t: "warm" },
+      { text: "认真聊聊边界在哪", t: "rational" },
+      { text: "无所谓，做自己最舒服", t: "free" }
+    ]
+  },
+  {
+    text: "遇到感情难题，你会怎么处理？",
+    options: [
+      { text: "先稳住局面，再想办法解决", t: "rock" },
+      { text: "马上找人倾诉，说出来就好", t: "sweet" },
+      { text: "冷静分析利弊，做最优选择", t: "rational" },
+      { text: "先放一放，过阵子自然有答案", t: "free" }
+    ]
+  },
+  {
+    text: "对象抱怨「你从不说爱我」，你会？",
+    options: [
+      { text: "用行动证明，也学着说出口", t: "rock" },
+      { text: "马上说「我爱你」，补偿 ta", t: "sweet" },
+      { text: "解释自己的表达方式就是这样", t: "rational" },
+      { text: "觉得 ta 太作，心里有点烦", t: "free" }
+    ]
+  },
+  {
+    text: "规划未来时，你最在意的是？",
+    options: [
+      { text: "给 ta 稳定有保障的生活", t: "rock" },
+      { text: "两个人开心，比什么都重要", t: "sunny" },
+      { text: "三观和目标一致，走得长远", t: "rational" },
+      { text: "不被规划绑死，保有自由", t: "free" }
+    ]
+  },
+  {
+    text: "你最想听对象夸你什么？",
+    options: [
+      { text: "「有你真甜」", t: "sweet" },
+      { text: "「你真好，真靠谱」", t: "warm" },
+      { text: "「你太清醒了」", t: "rational" },
+      { text: "「和你在一起好自由」", t: "free" }
+    ]
+  },
+  {
+    text: "你觉得恋爱里最幸福的时刻是？",
+    options: [
+      { text: "时刻黏在一起，说什么都开心", t: "sweet" },
+      { text: "被 ta 稳稳照顾着", t: "warm" },
+      { text: "两个人一起把日子过好", t: "rock" },
+      { text: "一起疯一起笑，没心没肺", t: "sunny" }
+    ]
+  }
+];
+</script>
+<script>
+/* ===== 4 种恋爱人格：主导人格 + 隐性人格 + 完整报告（前 3 条免费，后 5 条私信解锁） ===== */
+const TYPES = {
+  sweet: {
+    name: "小奶糖", char: "糖",
+    tagline: "粘人精本精，恋爱里的甜度担当",
+    grad: "linear-gradient(135deg,#FFB3C6,#FF5C8A)",
+    cards: [
+      { title: "人格关键词", body: '<div class="chips"><span>秒回星人</span><span>直球选手</span><span>高甜浓度</span><span>恋爱脑预备役</span></div>' },
+      { title: "恋爱中的你", body: "<p>你会把ta的聊天框置顶，看到「对方正在输入」就心跳加速；你发朋友圈会特意设置「仅ta可见」；ta随口提过的事，连ta自己都忘了，你却记得一清二楚。</p><p>你会因为ta一句「在忙」失落整晚，也会因为一句「我想你」开心一整天。对你来说，爱是电波，是心跳，是把手里所有的糖都塞给ta。</p>" },
+      { title: "你的恋爱优势", body: "<ul><li>热情满分，让对方时刻感受到被需要、被爱</li><li>共情力强，情绪价值给得又准又足</li><li>浪漫雷达灵敏，仪式感从来不缺</li></ul>" },
+      { title: "最佳匹配人格", locked: true, teaser: "你与「暖心大白」是高糖组合，和「人间清醒」却是高危组合——原因让你意想不到。", body: "你与「暖心大白」是天造地设的高糖组合：对方用细致照顾接住你的热烈，你用甜蜜回应ta的温柔，一个负责甜，一个负责稳。而「人间清醒」的冷静克制会让你患得患失，长期相处容易一个追、一个逃。" },
+      { title: "完整恋爱避坑指南", locked: true, teaser: "第一坑：凌晨两点还在等ta回消息的你，正在被「忽冷忽热」拿捏。", body: "<p>六条血泪预警，看看你中了几条：</p><ul><li>秒回陷阱：你消息秒回、随时待命，对方渐渐把你的「及时」当成「理所当然」，偶尔回慢了反而怪你。破解：建立自己的回应节奏，让等待成为常态。</li><li>忽冷忽热吊着你：ta心情好就热情、心情差就消失，你被情绪过山车拿捏，越得不到越上头。破解：把「ta今天理我没」从人生清单里划掉，安全感只能自己给。</li><li>恋爱脑借钱：你爱到深处忍不住为ta花钱，一句「急用」就能掏空你。破解：感情和金钱设硬隔离，超出小额一律不私下转账。</li><li>被当情绪垃圾桶：ta只找你倒苦水、从不过问你的感受。破解：对话要双向，长期单向输出的关系直接降级。</li><li>以爱为名的控制：ta说「太爱你了才管你」，查你手机、限制你社交，你还觉得甜蜜。破解：爱的表现是尊重，不是监控。</li><li>自我感动式付出：你熬夜准备惊喜，ta却无动于衷。破解：付出前先问自己——ta，值得吗？</li></ul>" },
+      { title: "专属攻略 · 脱单锦囊", locked: true, teaser: "把「你怎么还不回我」换成「我想你啦」，甜得更高级。", body: "<p>保持热情的同时，培养一两个能让你发光的独立爱好——专注做自己的你，魅力值翻倍。</p><p>练习把焦虑说成撒娇：把「你怎么还不回我」换成「我想你啦」，把「你是不是不爱我了」换成「抱抱我好不好」。</p><p>给爱留一点呼吸感：每周留一天不联系、不报备，你会惊喜地发现，ta反而更主动了。</p>" }
+    ]
+  },
+  warm: {
+    name: "暖心大白", char: "暖",
+    tagline: "温柔守护系，把爱都做进细节里",
+    grad: "linear-gradient(135deg,#FFC98A,#FF8FAB)",
+    cards: [
+      { title: "人格关键词", body: '<div class="chips"><span>体贴入微</span><span>行动派</span><span>稳定可靠</span><span>付出型选手</span></div>' },
+      { title: "恋爱中的你", body: "<p>你是那个记得ta上次说「想吃酸辣粉」的人；你会在ta加班时点好外卖，在ta感冒时备好药；你从不说漂亮话，但你的爱全在行动里。</p><p>只是你太擅长照顾别人，却很少允许自己被照顾——「我没事」是你说得最多的谎，「都行」是你说得最多的词。</p>" },
+      { title: "你的恋爱优势", body: "<ul><li>安全感拉满，让对方觉得自己被稳稳托住</li><li>细心程度一流，平凡日子也能过出温度</li><li>情绪稳定，是关系里最可靠的港湾</li></ul>" },
+      { title: "最佳匹配人格", locked: true, teaser: "你与「小奶糖」是双向奔赴，与「野猫系」却是典型的「养不熟」。", body: "你与「小奶糖」是双向奔赴的踏实组合：ta的直球表达恰好补上你的含蓄，你能接住ta的依赖，ta能给你热烈回应。而「野猫系」需要大量自由和空间，你的细致照顾容易被当成「束缚」，付出容易打水漂。" },
+      { title: "完整恋爱避坑指南", locked: true, teaser: "第一坑：你把ta照顾得无微不至，ta却把你当成了免费工具人。", body: "<p>六条血泪预警，看看你中了几条：</p><ul><li>工具人陷阱：你把ta照顾得无微不至，ta习惯了就不珍惜，你的好成了免费服务。破解：停止单方面供应，让ta也为你付出。</li><li>不敢提需求：你永远「我没事」「都行」，委屈攒到爆才爆发。破解：从「我今天有点累，你来做饭」开始练习开口。</li><li>圣母心拯救：总想「用爱感化」渣的、凉的、不成熟的，把自己当救世主。破解：你是恋人，不是心理医生，ta的成长该ta自己负责。</li><li>好说话被拿捏：ta吃定你不会走，随意爽约、冷落你，你还自我安慰「ta只是忙」。破解：亮出底线、说到做到，温和但有牙齿。</li><li>过度包办：你把ta的生活全包了，反而养出ta的懒惰和理所当然。破解：有些事让ta自己做，爱不是伺候。</li><li>委屈换讨好：怕失去而不断退让，最后退无可退。破解：先爱自己，再爱别人，你的感受同样重要。</li></ul>" },
+      { title: "专属攻略 · 脱单锦囊", locked: true, teaser: "每周留一次「自我关怀」时间，你的付出才会被珍惜。", body: "<p>每周留一次「自我关怀」时间：一个人逛街、看电影、吃顿好的，先把自己照顾好。</p><p>练习直接表达需求，从「我有点累」开始，而不是永远「我没事」。你会惊讶地发现，说出来之后，关系反而更近了。</p><p>把「默默付出」改成「有来有往」：ta为你做了什么，大方说出来并感谢ta，让付出成为双向的甜蜜。</p>" }
+    ]
+  },
+  rational: {
+    name: "人间清醒", char: "智",
+    tagline: "人间清醒派，恋爱也要势均力敌",
+    grad: "linear-gradient(135deg,#C9B8FF,#8B7CF6)",
+    cards: [
+      { title: "人格关键词", body: '<div class="chips"><span>独立清醒</span><span>边界感</span><span>长期主义</span><span>慕强雷达</span></div>' },
+      { title: "恋爱中的你", body: "<p>你是恋爱里那个「人间清醒」：ta画饼你能一眼看穿，ta玩套路你能冷静拆穿。你不会因为一句甜言蜜语上头，却会因为一个人的责任感和边界感心动。</p><p>只是你太擅长保护自己，有时候连真心送到门口，你都要先验货再开门——等你验完，对方可能已经走了。</p>" },
+      { title: "你的恋爱优势", body: "<ul><li>情绪稳定，吵架也能就事论事不内耗</li><li>自带吸引力，清醒独立的魅力值很高</li><li>识人眼光准，能避开大部分烂桃花</li></ul>" },
+      { title: "最佳匹配人格", locked: true, teaser: "你与「暖心大白」是模范组合，与「小奶糖」却容易互相折磨。", body: "你与「暖心大白」是细水长流的模范组合：对方的温柔稳定让你安心，你的清醒理性让关系更健康长久。而「小奶糖」需要高频的情感回应，你的理性和节奏感会被ta解读为「不爱了」，容易一个追、一个逃。" },
+      { title: "完整恋爱避坑指南", locked: true, teaser: "第一坑：你以为自己最清醒，其实正被「慕强人设」精准拿捏。", body: "<p>六条血泪预警，看看你中了几条：</p><ul><li>看似清醒、实则被套路：你自认看人很准，但慕强心理让你对「优秀人设」上头，反而忽略人品细节。破解：看人看下限——ta生气时、落魄时、得势时怎么对你。</li><li>冷战式回避：吵架你选择讲道理和冷静，对方却需要情感回应，你越「理性」ta越寒心。破解：先共情、后讲理，情绪到位了道理才进得去。</li><li>权衡利弊错过真心：你习惯打分、比较、找最优解，把感情当投资，反而错过真诚但「不够完美」的人。破解：真心不是KPI，偶尔允许自己「上头」一次。</li><li>被激将法拿捏：ta用「你果然不爱我」「别人都比你温柔」刺激你，你为了证明自己反而妥协。破解：不被定义绑架，你的爱不需要自证。</li><li>边界变高墙：你保护色太强，对方靠近一步你退两步，慢慢把关系处成陌生人。破解：适度示弱，让对方看见你的需要。</li><li>心软后遗症：嘴上清醒，行动上却一而再给机会，最后成了「清醒地被骗」。破解：行为和语言一致，说离开就离开。</li></ul>" },
+      { title: "专属攻略 · 脱单锦囊", locked: true, teaser: "每周安排一次不设目标的约会，让理性里多一点温度。", body: "<p>每周安排一次「不设目标」的约会：不看电影打分、不评估对方表现，只是单纯地开心。你会发现，放下评分卡之后，心动反而来得更容易。</p><p>当对方表达情感时，先回应情绪、再讨论事情：「听起来你今天很委屈」永远比「但是你说得不对」更近一步。</p><p>学会主动示弱：偶尔让ta帮你一个忙、陪你做一件小事，关系就是在「被需要」里变亲密的。</p>" }
+    ]
+  },
+  free: {
+    name: "野猫系", char: "野",
+    tagline: "自由洒脱系，爱是并肩奔跑不是拴住",
+    grad: "linear-gradient(135deg,#8FF0E0,#2EC4B6)",
+    cards: [
+      { title: "人格关键词", body: '<div class="chips"><span>自由至上</span><span>随性有趣</span><span>神秘感</span><span>回避承诺</span></div>' },
+      { title: "恋爱中的你", body: "<p>你像一阵风，爱的时候热烈，但从不交出全部的自己。你享受暧昧期的推拉，讨厌查岗和报备，宁可一个人去看电影，也不愿将就一段无聊的关系。</p><p>你嘴上总说「无所谓」，其实你只是怕被束缚——自由是你的盔甲，也是你的软肋。你把推开别人，当成了保护自己的方式。</p>" },
+      { title: "你的恋爱优势", body: "<ul><li>相处轻松不内耗，给对方充分的呼吸感</li><li>灵魂有趣，总能带另一半发现生活的新鲜面</li><li>从不恋爱脑，感情里自带清醒滤镜</li></ul>" },
+      { title: "最佳匹配人格", locked: true, teaser: "你与「人间清醒」彼此成全，与「暖心大白」却容易辜负真心。", body: "你与「人间清醒」是彼此成全的洒脱组合：你们都需要空间，也都尊重对方的节奏，一个洒脱一个清醒，不拖累彼此，反而能走很远。而「暖心大白」的细致照顾需要回报，你的随性会被ta解读为「不上心」，容易一个给、一个逃。" },
+      { title: "完整恋爱避坑指南", locked: true, teaser: "第一坑：你的忽冷忽热不是魅力，是把真心的人越推越远。", body: "<p>六条血泪预警，看看你中了几条：</p><ul><li>忽冷忽热反噬：你习惯若即若离，以为保持神秘是魅力，却把真心的人越推越远。破解：神秘感适度，真心要回应。</li><li>回避承诺：一谈未来你就想逃，用「还不想定下来」推开对的人。破解：分清「自由」和「恐惧」，问问自己到底在怕什么。</li><li>错过式遗憾：你以为永远有更好的，结果错过了那个最适合的。破解：幸福不是单选题，珍惜眼前人。</li><li>被欲擒故纵反制：你玩套路，总有人比你更会玩，最后你成了被吊着的那个。破解：真诚是最大的必杀技，别在感情里斗法。</li><li>需要时不表达：你难受时选择「自己消化」，对方根本不知道，误会越积越深。破解：示弱也是能力，说出来才有人接得住。</li><li>用冷暴力逼分手：你把「不爱了」包装成「想要自由」，伤人而不自知。破解：不爱就体面告别，别让对方在等待里自我怀疑。</li></ul>" },
+      { title: "专属攻略 · 脱单锦囊", locked: true, teaser: "用稳定的回应给自由上保险，ta安心了，你才能更自在。", body: "<p>尝试固定「专属时刻」：每周一次高质量的陪伴，不看手机、不谈道理，只是好好相处。你会发现，给足安全感之后，自由反而更多了。</p><p>练习「报平安式回应」：不用报备行程，但忙完回一句「刚忙完，想你啦」，10 秒钟换来的安心，值得。</p><p>给未来的自己留一个选项：遇到那个「在一起很舒服」的人，试着多留一步——自由很重要，但有人并肩奔跑的风景，更美。</p>" }
+    ]
+  },
+  sunny: {
+    name: "小太阳", char: "阳",
+    tagline: "阳光气氛组，恋爱里的快乐源泉",
+    grad: "linear-gradient(135deg,#FFD86B,#FF9F45)",
+    cards: [
+      { title: "人格关键词", body: '<div class="chips"><span>乐观开朗</span><span>气氛担当</span><span>嘴甜会哄</span><span>情绪充电宝</span></div>' },
+      { title: "恋爱中的你", body: "<p>你是那个把日子过成段子的人：ta不开心，你能用一个冷笑话把气氛救活；吵架还没升温，你先把自己逗笑了。你爱笑也爱闹，恨不得把所有好玩的事都分享给ta，让ta觉得和你在一起，永远不无聊。</p><p>只是你太擅长让别人笑，却很少让人看见你也会难过——快乐是你的铠甲，也是你最怕被戳破的软肋。</p>" },
+      { title: "你的恋爱优势", body: "<ul><li>感染力强，再普通的日子也能被你过出快乐</li><li>不记仇不冷战，矛盾当场就能化解</li><li>情绪价值拉满，是ta随叫随到的充电宝</li></ul>" },
+      { title: "最佳匹配人格", locked: true, teaser: "你与「小奶糖」是双倍快乐组合，与「人间清醒」却容易一个闹、一个静。", body: "你与「小奶糖」是双倍快乐的高能组合：ta的黏人配上你的幽默，一个负责甜、一个负责乐，日子天天像过节。而「人间清醒」需要安静和空间，你的热情和玩笑容易被解读为「不够认真」，相处久了容易一个追、一个躲。" },
+      { title: "完整恋爱避坑指南", locked: true, teaser: "第一坑：你把玩笑当情趣，却不知道已经踩了ta的雷。", body: "<p>六条血泪预警，看看你中了几条：</p><ul><li>玩笑过度反伤感情：你爱用玩笑调节气氛，但戳到ta的痛点还不自知。破解：玩笑有底线，涉及ta的家人、外貌、旧伤，一律不碰。</li><li>用搞笑逃避深聊：一聊到严肃话题你就打哈哈，ta想认真你却在玩梗。破解：该认真时收起玩笑，先接住情绪再谈事。</li><li>快乐人设扛太累：你习惯了逗人开心，难过时反而说不出口，一个人硬扛。破解：允许自己在ta面前「不好笑」，脆弱也是亲密。</li><li>被当没心没肺：你嘻嘻哈哈惯了，ta会以为你什么都不在乎。破解：大事上给足认真，让ta知道你嬉皮笑脸底下是真在意。</li><li>过度迎合气氛：聚会你永远是热场王，却常常忽略自己累不累。破解：累了就安静一会儿，不必为气氛燃烧自己。</li><li>新鲜感依赖症：你总想找更好玩的事，容易让关系停在「好玩」没深入。破解：和同一个人也找得到新意，深度比新鲜更长久。</li></ul>" },
+      { title: "专属攻略 · 脱单锦囊", locked: true, teaser: "每周留一个「安静时刻」，你的深度比热闹更动人。", body: "<p>每周留一个「安静时刻」：不玩梗、不逗乐，只是认真听ta说说话，你会发现深度比热闹更让人心动。</p><p>练习把「哈哈哈」换成「我也是」：ta难过时，先共情再逗趣，顺序对了效果翻倍。</p><p>把快乐分给ta之外也留给自己：有自己热爱的你，快乐才有根，而不是全靠ta回应。</p>" }
+    ]
+  },
+  rock: {
+    name: "靠谱担当", char: "稳",
+    tagline: "沉稳靠谱系，是关系里让人安心的定盘星",
+    grad: "linear-gradient(135deg,#9FD0E0,#4E8BB8)",
+    cards: [
+      { title: "人格关键词", body: '<div class="chips"><span>说到做到</span><span>情绪稳定</span><span>责任感强</span><span>默默扛事</span></div>' },
+      { title: "恋爱中的你", body: "<p>你是关系里那个「定盘星」：答应的事从不食言，ta慌的时候你说「别怕，有我在」。你把ta放进未来规划里，存钱、见家长、一步步都算数。</p><p>只是你习惯把压力都自己扛，「没事」说得太顺口，情绪都藏起来——ta有时会觉得你像座山，可靠，却不知道你也会累。</p>" },
+      { title: "你的恋爱优势", body: "<ul><li>安全感天花板，说到做到从不画饼</li><li>冲突时最冷静，从不情绪化伤人</li><li>长期主义，认真对待每一段关系</li></ul>" },
+      { title: "最佳匹配人格", locked: true, teaser: "你与「人间清醒」是理性同盟，与「野猫系」却是一个想定、一个想飞。", body: "你与「人间清醒」是互相成就的理性同盟：你负责稳定落地，ta负责把关方向，两个人都认真，关系走得又稳又远。而「野猫系」需要大量自由和新鲜感，你的规划和责任在ta眼里像「枷锁」，容易一个想定下来、一个想逃开。" },
+      { title: "完整恋爱避坑指南", locked: true, teaser: "第一坑：你把所有压力都自己扛，却把「会累」藏成了「冷漠」。", body: "<p>六条血泪预警，看看你中了几条：</p><ul><li>什么都自己扛：你觉得「说出来是麻烦别人」，压力全吞进肚子。破解：学会说「我需要你」，让ta参与你的生活。</li><li>情绪不外露被当冷漠：你喜怒不形于色，ta以为你不爱了。破解：每天主动说一句今天的心情，让ta走进你的世界。</li><li>过度规划缺浪漫：你把约会排成日程表，少了惊喜和心跳。破解：偶尔来一次「说走就走」，让关系喘口气。</li><li>把关心说成说教：你总想帮ta规避风险，说多了像「爹味」。破解：先问ta想要建议还是倾听，别急着给方案。</li><li>不表达需求：你习惯了照顾别人，却从不提自己的需要。破解：直接说「我希望你多陪陪我」，比憋着更有效。</li><li>太稳重缺仪式感：你记得所有大事，却忘了小事也值得庆祝。破解：把普通日子也过出仪式感，爱要让人看得见。</li></ul>" },
+      { title: "专属攻略 · 脱单锦囊", locked: true, teaser: "练习表达脆弱，你的肩膀也需要有人靠。", body: "<p>练习「表达脆弱」：每周主动说一件自己的难处，你会发现示弱不是减分，是让ta更靠近你。</p><p>给关系加点「意外」：不按计划的一次约会、一份小惊喜，比一百句承诺更让人心动。</p><p>把「我没事」换成「我需要你」：你的肩膀扛得住世界，但爱需要两个人一起扛。</p>" }
+    ]
+  }
+};
+</script>
+
+<script>
+/* ===== 12 星座恋爱能量 + 12 生肖 ===== */
+const ZODIACS = {
+  aries: { name:'白羊座', range:'3.21-4.19', element:'火', star:'火星', sym:'♈',
+    love:'白羊座是恋爱里的直球选手：喜欢就主动出击，爱意藏不住，闹架也来得快去得快，从不记仇。但爱情里最怕的是“淡了”——激情一过，就开始觉得对方无趣。',
+    advice:'{P}遇上白羊座的火象能量，爱就要大声说出来：行动力直接拉满，但也容易三分钟热度——真正的心动，需要你多坚持一下。',
+    match:{ sweet:58, warm:40, rational:72, free:86, sunny:82, rock:46 },
+    horoscope:'当下你的恋爱能量偏“冲刺模式”：容易对一个人上头快，但上头后的冷却也快。分析一下是真心动还是瞬间激情，再决定付出。行动指南：下次心动时先拒绝快速关系，多约两次平凡的面，才能看清真面目。',
+    best:['狮子座','射手座','水瓶座'], warn:['巨蟹座','摩羯座'] },
+  taurus: { name:'金牛座', range:'4.20-5.20', element:'土', star:'金星', sym:'♉',
+    love:'金牛座爱得缓慢而坂实：不说温柔话，但会把吃的美好的都给你。拥抱和触摸是他们的语言，经济安全感是他们的爱。但欠缺感性，“我爱你”说得少，做得多。',
+    advice:'{P}遇上金牛座的土象能量，爱情偏“经营”而非“刺激”：稳定可靠是你的底色，但记得把感情说出口，不要让对方去猜。',
+    match:{ sweet:66, warm:82, rational:60, free:42, sunny:58, rock:88 },
+    horoscope:'当下你的恋爱能量偏“安心模式”：越来越在意对方的责任心和生活细节，对纯爱情沙封感觉一般。行动指南：主动表达一次心意，你的稳重在对方眼里可能是“不在意”，试着开口说“我想你”。',
+    best:['处女座','摩羯座','巨蟹座'], warn:['水瓶座','双子座'] },
+  gemini: { name:'双子座', range:'5.21-6.21', element:'风', star:'水星', sym:'♊',
+    love:'双子座恋爱里谁跟他玩得来就跟谁走：话料是最大的吸引力。他们有趣、谁变，但深入交往后容易“六日变脸”，让人觉得抓不住。',
+    advice:'{P}遇上双子座的风象能量，你的恋爱谁轴很强：爱情需要新鲜感澐输，但也别因为好奇心而错过身边的真心。',
+    match:{ sweet:74, warm:48, rational:64, free:80, sunny:76, rock:44 },
+    horoscope:'当下你的恋爱能量偏“探索模式”：容易对多个人同时感兴趣，但内心并不确定要什么。行动指南：给自己定个“三个月之约”，在期间只认真了解一个人，你会发现深入后的人比新鲜人更有趣。',
+    best:['天秤座','水瓶座','白羊座'], warn:['处女座','双鱼座'] },
+  cancer: { name:'巨蟹座', range:'6.22-7.22', element:'水', star:'月亮', sym:'♋',
+    love:'巨蟹座是恋爱里的“家”：他们把对方当家人照顾，记得对方的入常喜好，但也极度缺安全感，容易因为一句无心话想多整夜。',
+    advice:'{P}遇上巨蟹座的水象能量，情感变得细腻又敏感：爱了就全心全意，但记得把“你怎么不回我”说成“我有点想你了”。',
+    match:{ sweet:85, warm:78, rational:45, free:35, sunny:56, rock:70 },
+    horoscope:'当下你的恋爱能量偏“依赖模式”：容易把对方当成情绪支枱，对方忙了你就安全感崩坯。行动指南：建立自己的情绪集合点（朋友、爱好、运动），依赖越少，爱越稳。',
+    best:['双鱼座','金牛座','处女座'], warn:['白羊座','天秤座'] },
+  leo: { name:'狮子座', range:'7.23-8.22', element:'火', star:'太阳', sym:'♌',
+    love:'狮子座爱得高调而热烈：要“辣”、要被宠、要外面给足面子。他们对心动的人大方得出奇，但容易把爱情当成“单人表演”，忘了问对方想要什么。',
+    advice:'{P}遇上狮子座的火象能量，爱情里自信满满：你的热情很让人着迷，但记得把小归场交给对方，爱是共舞，不是单人秀。',
+    match:{ sweet:62, warm:52, rational:58, free:74, sunny:86, rock:54 },
+    horoscope:'当下你的恋爱能量偏“展示模式”：容易被“能让你面子有光”的人吸引，而忽略内心的共鸣。行动指南：少在意对方“能不能让你快乐”的外部表象，多用一次私下的安静相处测试真心。',
+    best:['白羊座','射手座','天秤座'], warn:['金牛座','天蝎座'] },
+  virgo: { name:'处女座', range:'8.23-9.22', element:'土', star:'水星', sym:'♍',
+    love:'处女座是恋爱里的“细节检查官”：好就好在记得你随口说过的一切，也会在心里给关系打分。爱上一个人时收起毒舌，用最笨拙的方式对你好——但标准很高，宁愿单着也不将就。',
+    advice:'{P}遇上处女座的土象能量，爱得认真又细腻：你把感情当成作品精心打磨，但别把对方当成“验收项目”——先感受，再评判。',
+    match:{ sweet:50, warm:70, rational:80, free:38, sunny:52, rock:76 },
+    horoscope:'当下你的恋爱能量偏“筛选模式”：容易在细节里错过对的人，也容易把对方的小毛病放大成不可承受。行动指南：试着列出对方的 3 个优点再说缺点，爱情不是完美主义，是接受与互补。',
+    best:['金牛座','摩羯座','巨蟹座'], warn:['双子座','射手座'] },
+  libra: { name:'天秤座', range:'9.23-10.23', element:'风', star:'金星', sym:'♎',
+    love:'天秤座爱美也爱平衡：对心动的人温柔大方，但“好人”当太久就不会拒绝。他们在感情里容易为了和谐而漫没了自己的立场，也容易因为“还有更好的”而不得不正试。',
+    advice:'{P}遇上天秤座的风象能量，爱情里温柔但容易漫没底线：学会说“不”，真正的吸引力来自有主见的你，而不是只有争取的你。',
+    match:{ sweet:68, warm:56, rational:62, free:70, sunny:72, rock:58 },
+    horoscope:'当下你的恋爱能量偏“比较模式”：容易在多个选项间摇摆不定，略过了就是最后什么都没选。行动指南：定个“决定日”，到时间就选那个让你心动最多的人，爱情不是最优解，是心动解。',
+    best:['双子座','水瓶座','狮子座'], warn:['摩羯座','巨蟹座'] },
+  scorpio: { name:'天蝎座', range:'10.24-11.22', element:'水', star:'军王星', sym:'♏',
+    love:'天蝎座爱得深沉又绝对：迷上一个人就全身心投入，但也变态式地在意对方的一举一动。他们容易把好奇心当真心，把推拉当操控，缺乏安全感。',
+    advice:'{P}遇上天蝎座的水象能量，爱得深沉又敏感：你的专一很贵重，但别用“测试”心态谋爱情，直接表达需要，比留心眼更美。',
+    match:{ sweet:60, warm:44, rational:52, free:66, sunny:48, rock:66 },
+    horoscope:'当下你的恋爱能量偏“测试模式”：容易给对方设局验证心意，但人心经不起测试。行动指南：把“他会主动找我吗”换成“我想他了就去找他”，主动不丢人，丢的是假高冷。',
+    best:['双鱼座','巨蟹座','处女座'], warn:['狮子座','水瓶座'] },
+  sagittarius: { name:'射手座', range:'11.23-12.21', element:'火', star:'木星', sym:'♐',
+    love:'射手座恋爱里像一阵风：热情来快也去快，最怕被捆住。他们不小心就把对方当成“同路伙伴”，而不是“情人”，爱情里缺了点专属的权重。',
+    advice:'{P}遇上射手座的火象能量，爱情豁达又轻松：你的自由是魅力，但记得给对方一个“专属身份”，爱是选择关系，不是选择跑路。',
+    match:{ sweet:44, warm:36, rational:58, free:88, sunny:84, rock:38 },
+    horoscope:'当下你的恋爱能量偏“风格模式”：容易用“还没遇到对的人”安慰自己，却在忽略身边的感动。行动指南：试着和同一个人连续约 3 次，你会发现“重复”里才藏着真心。',
+    best:['白羊座','狮子座','水瓶座'], warn:['处女座','双鱼座'] },
+  capricorn: { name:'摩羯座', range:'12.22-1.19', element:'土', star:'土星', sym:'♑',
+    love:'摩羯座爱得冷静又长期：他们把对方纳入人生规划，用“一起前进”表达爱意。但太习惯管理情绪，让对方觉得他不爱，实际上只是不会表达。',
+    advice:'{P}遇上摩羯座的土象能量，爱得稳重且长远：你的责任心是最大的魅力，但别把爱情当项目管理，多销售一点心动，少讲一点道理。',
+    match:{ sweet:42, warm:64, rational:84, free:40, sunny:46, rock:86 },
+    horoscope:'当下你的恋爱能量偏“规划模式”：容易先算出和谁在一起“最合算”，而不是最心动。行动指南：给自己放一天假，当一天“不算账”的人，去和那个让你心动却“不太合理”的人聊聊。',
+    best:['金牛座','处女座','天蝎座'], warn:['双子座','射手座'] },
+  aquarius: { name:'水瓶座', range:'1.20-2.18', element:'风', star:'天王星', sym:'♒',
+    love:'水瓶座恋爱里先做朋友再谈恋爱：他们需要大量自由和空间，最怕“戳破窗户纸”的紧逼。他们的爱表达得冷淡又奇特，但心里都记得。',
+    advice:'{P}遇上水瓶座的风象能量，爱情里宁可孤独不不就在：你的独特是吸引力，但别把“自由”当成拒绝开放的借口，心动了就适当叫停。',
+    match:{ sweet:40, warm:38, rational:72, free:90, sunny:70, rock:42 },
+    horoscope:'当下你的恋爱能量偏“观察模式”：容易在旁边看好戏，却不愿意下场参与。行动指南：对心动的人主动哺一次小机，即使狠狠的，也比“偶尔想起”更接近真心。',
+    best:['天秤座','双子座','射手座'], warn:['金牛座','天蝎座'] },
+  pisces: { name:'双鱼座', range:'2.19-3.20', element:'水', star:'海王星', sym:'♓',
+    love:'双鱼座是恋爱里的“梦想家”：爱情对他们来说是浪漫电影，不是现实生活。他们感情丰富、同理心强，但容易在不合适的人身上投射幻想，也容易为感情牺牲自己。',
+    advice:'{P}遇上双鱼座的水象能量，感情丰富又敏感：你的深情很美，但记得先检验对象是否值得，再赌上全部的情感。',
+    match:{ sweet:88, warm:72, rational:34, free:46, sunny:62, rock:54 },
+    horoscope:'当下你的恋爱能量偏“投射模式”：容易把幻想安在对方身上，看不清真实的人。行动指南：对心动的人先完成一次“现实接触”（约会、聊现实话题），再决定是否深入。',
+    best:['巨蟹座','天蝎座','金牛座'], warn:['双子座','射手座'] }
+};
+const ANIMALS = {
+  rat:'鼠：机灵会来事，恋爱里擅长制造惊喜，但容易想太多。',
+  ox:'牛：认定一个人就很专一，用行动表达爱，慢热但可靠。',
+  tiger:'虎：爱得热烈有主见，喜欢势均力敌的对手，受不了被安排。',
+  rabbit:'兆：温柔细腻会照顾人，安全感给得足，但害怕冲突。',
+  dragon:'龙：自带气场，容易吸引慕强的人，恋爱里要学会放下架子。',
+  snake:'蛇：神秘有魅力，喜欢推拉和探试，认定了就深情专一。',
+  horse:'马：自由至上，爱新鲜感，需要空间，讨厌被查岗。',
+  goat:'羊：真诚直率，恋爱里像小孩，需要被理解和包容。',
+  monkey:'猴：聪明有趣，会哄人，但容易显得不够认真。',
+  rooster:'鸡：挑剔又精致，对品质要求高，认定的标准也高。',
+  dog:'狗：忠诚靠谱，付出型选手，容易因为太实在被辜负。',
+  pig:'猪：乐观随和，不内耗，恋爱里是治愈系选手。'
+};
+</script>
+<!-- __DATA_END2__ -->
+
+
+
+<script>
+/* ===== 状态与工具 ===== */
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+function ssGet(k){ try { return sessionStorage.getItem(k); } catch(e){ return null; } }
+function ssSet(k,v){ try { sessionStorage.setItem(k,v); } catch(e){} }
+const N = QUESTIONS.length;
+const LOCK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+let state = { step: 0, answers: [], animating: false, result: null, birth: null };
+const ZD = [['aquarius',1,20],['pisces',2,19],['aries',3,21],['taurus',4,20],['gemini',5,21],['cancer',6,22],['leo',7,23],['virgo',8,23],['libra',9,23],['scorpio',10,24],['sagittarius',11,23],['capricorn',12,22]];
+const ANIMAL_KEYS = ['rat','ox','tiger','rabbit','dragon','snake','horse','goat','monkey','rooster','dog','pig'];
+const ANIMAL_SHORT = { rat:'鼠', ox:'牛', tiger:'虎', rabbit:'兆', dragon:'龙', snake:'蛇', horse:'马', goat:'羊', monkey:'猴', rooster:'鸡', dog:'狗', pig:'猪' };
+function getZodiac(m, d) {
+  for (var i = 0; i < 12; i++) {
+    if (m === ZD[i][1]) return (d >= ZD[i][2]) ? ZD[i][0] : ZD[(i + 11) % 12][0];
+  }
+  return 'capricorn';
+}
+function getAnimal(y) { return ANIMAL_KEYS[(((y - 4) % 12) + 12) % 12]; }
+function daysInMonth(y, m) { return new Date(y, m, 0).getDate(); }
+function initBirth() {
+  var ys = $('b-year');
+  for (var y = 2010; y >= 1935; y--) ys.insertAdjacentHTML('beforeend', '<option value="' + y + '">' + y + '年</option>');
+  var ms = $('b-month');
+  for (var m = 1; m <= 12; m++) ms.insertAdjacentHTML('beforeend', '<option value="' + m + '">' + m + '月</option>');
+  fillDays();
+}
+function fillDays() {
+  var y = parseInt($('b-year').value, 10) || 1990;
+  var m = parseInt($('b-month').value, 10) || 1;
+  var ds = $('b-day');
+  var cur = ds.value;
+  var max = daysInMonth(y, m);
+  ds.innerHTML = '<option value="">日</option>';
+  for (var d = 1; d <= max; d++) ds.insertAdjacentHTML('beforeend', '<option value="' + d + '">' + d + '日</option>');
+  if (cur && parseInt(cur, 10) <= max) ds.value = cur;
+}
+function readBirth() {
+  var y = parseInt($('b-year').value, 10);
+  var m = parseInt($('b-month').value, 10);
+  var d = parseInt($('b-day').value, 10);
+  if (!y || !m || !d) return null;
+  return { year: y, month: m, day: d, zodiac: getZodiac(m, d), animal: getAnimal(y) };
+}
+
+/* ===== 能量名片 · 数据与逻辑 ===== */
+const ZKEYS = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
+const LUCKY_NUM = { aries:[1,9], taurus:[6,2], gemini:[5,3], cancer:[2,8], leo:[1,5], virgo:[5,8], libra:[6,9], scorpio:[8,4], sagittarius:[3,9], capricorn:[4,8], aquarius:[4,7], pisces:[7,3] };
+const LUCKY_ANIMAL = { rat:[2,6], ox:[8,1], tiger:[3,7], rabbit:[4,9], dragon:[1,6], snake:[7,2], horse:[3,8], goat:[6,9], monkey:[4,8], rooster:[7,9], dog:[3,5], pig:[2,7] };
+const ELEMENT_STYLE = {
+  fire:{ name:'珊瑚橘 · 落日金', sw:['#FF7A59','#FFD166'] },
+  earth:{ name:'暖杏 · 米白', sw:['#E8B48A','#F5E9DC'] },
+  water:{ name:'雾霾蓝 · 月银', sw:['#7FA7C9','#C9D9E8'] },
+  air:{ name:'薄荷绿 · 浅紫', sw:['#7FD8BE','#D9C7F0'] },
+  '火':{ name:'珊瑚橘 · 落日金', sw:['#FF7A59','#FFD166'] },
+  '土':{ name:'暖杏 · 米白', sw:['#E8B48A','#F5E9DC'] },
+  '水':{ name:'雾霾蓝 · 月银', sw:['#7FA7C9','#C9D9E8'] },
+  '风':{ name:'薄荷绿 · 浅紫', sw:['#7FD8BE','#D9C7F0'] }
+};
+const ZODIAC_TONE = {
+  aries:{ name:'珊瑚红', sw:'#FF6B6B' }, taurus:{ name:'琥珀棕', sw:'#C89B6A' },
+  gemini:{ name:'鸢尾紫', sw:'#9B7EDE' }, cancer:{ name:'藕荷粉', sw:'#E8A9C9' },
+  leo:{ name:'鎏金', sw:'#E8B84B' }, virgo:{ name:'松石绿', sw:'#3FB8AF' },
+  libra:{ name:'樱花粉', sw:'#F5A9B8' }, scorpio:{ name:'暗夜紫', sw:'#6C5B7B' },
+  sagittarius:{ name:'湛蓝', sw:'#4A90D9' }, capricorn:{ name:'苔原绿', sw:'#8A9B6E' },
+  aquarius:{ name:'电光蓝', sw:'#3D5AFE' }, pisces:{ name:'幻海蓝', sw:'#7EC8E3' }
+};
+function luckyColor(bd){
+  var es = ELEMENT_STYLE[ZODIACS[bd.zodiac].element] || ELEMENT_STYLE.earth;
+  var main = es.name.split(' \u00b7 ')[0];
+  var lk = LUCKY_ANIMAL[bd.animal] || [1, 1];
+  var idx = (birthRoot(bd) + lk[0] + lk[1] + (ZKEYS.indexOf(bd.zodiac) + 1)) % 12;
+  var t = ZODIAC_TONE[ZKEYS[idx]];
+  return { name: main + ' \u00b7 ' + t.name, sw: [es.sw[0], t.sw] };
+}
+function luckyNums(bd){
+  var nums = [birthRoot(bd)].concat(LUCKY_NUM[bd.zodiac], LUCKY_ANIMAL[bd.animal]);
+  var seen = {}, arr = [];
+  for (var i = 0; i < nums.length && arr.length < 3; i++) {
+    if (!seen[nums[i]]) { seen[nums[i]] = 1; arr.push(nums[i]); }
+  }
+  return arr;
+}
+
+const KEYWORDS = {
+  aries:'直球出击，爱意藏不住', taurus:'爱得缓慢而踏实', gemini:'有趣善变，话料即吸引力',
+  cancer:'把爱过成家的温度', leo:'高调热烈，真心也大方', virgo:'挑剔即筛选，细节见真心',
+  libra:'温柔爱平衡，别委屈自己', scorpio:'爱得深沉而绝对', sagittarius:'自由至上，不爱被拴住',
+  capricorn:'务实长情，爱在行动里', aquarius:'独特清醒，先做自己', pisces:'浪漫敏感，爱像一场梦'
+};
+const TODAY_ACTS = [
+  '宜主动邀约 · 忌想太多', '宜坦诚沟通 · 忌翻旧账', '宜制造惊喜 · 忌忽冷忽热',
+  '宜耐心倾听 · 忌急着反驳', '宜表达想念 · 忌赌气冷战', '宜一起做饭 · 忌各自刷手机',
+  '宜肯定对方 · 忌口是心非', '宜给足空间 · 忌夺命连环call'
+];
+function birthRoot(bd){
+  var s = String(bd.year) + bd.month + bd.day;
+  while (s.length > 1) {
+    var t = 0;
+    for (var i = 0; i < s.length; i++) t += parseInt(s[i], 10);
+    s = String(t);
+  }
+  return parseInt(s, 10);
+}
+function energyCard(){
+  var box = $('energy-card');
+  var bd = readBirth();
+  if (!bd) { box.className = 'energy-card'; box.innerHTML = ''; return; }
+  var Z = ZODIACS[bd.zodiac], A = ANIMAL_SHORT[bd.animal];
+  var es = luckyColor(bd);
+  var arr = luckyNums(bd);
+  var zi = ZKEYS.indexOf(bd.zodiac);
+  var seed = bd.year * 10000 + bd.month * 100 + bd.day + zi * 7;
+  var score = ((seed * 9301 + 49297) % 233280) / 2332.8;
+  score = Math.round(score * 9) + 1;
+  var act = TODAY_ACTS[seed % TODAY_ACTS.length];
+  var numsHtml = arr.map(function(n){ return '<span class="ec-num">' + n + '</span>'; }).join('');
+  box.innerHTML =
+    '<div class="ec-main"><span class="sym">' + Z.sym + '</span>属' + A + ' · ' + Z.name + '</div>' +
+    '<div class="ec-row"><span class="ec-tag">幸运数字</span><span class="ec-nums">' + numsHtml + '</span></div>' +
+    '<div class="ec-row"><span class="ec-tag">幸运色</span><span class="ec-swatch" style="background:linear-gradient(135deg,' + es.sw[0] + ',' + es.sw[1] + ')"></span><span class="ec-colorname">' + es.name + '</span></div>' +
+    '<div class="ec-row"><span class="ec-tag">今日恋爱能量</span><span class="ec-score">桃花指数 <b>' + score + '</b></span><span class="ec-bar"><i style="width:' + score + '%"></i></span></div>' +
+    '<div class="ec-hint">' + act + '</div>' +
+    '<div class="ec-key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg>' + KEYWORDS[bd.zodiac] + '</div>';
+  box.className = 'energy-card show';
+}
+
+let toastTimer = null;
+
+const $ = (id) => document.getElementById(id);
+
+function buyTip(){ toast('get 同款：私信我，发你购买链接'); }
+
+function toast(msg) {
+  const el = $('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+function backToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+function goto(viewId) {
+  ['view-home', 'view-quiz', 'view-result'].forEach(v =>
+    $(v).classList.toggle('active', v === viewId)
+  );
+  window.scrollTo(0, 0);
+  var tb = $('top-btn');
+  if (tb) tb.classList.toggle('show', viewId === 'view-result');
+}
+
+/* ===== 首页 / 返回 ===== */
+function goHome() {
+  state = { step: 0, answers: [], animating: false, result: null };
+  goto('view-home');
+}
+
+function askGoHome() {
+  if (state.answers.length === 0) { goHome(); return; }
+  $('confirm-modal').classList.add('active');
+}
+
+function confirmLeave(leave) {
+  $('confirm-modal').classList.remove('active');
+  if (leave) goHome();
+}
+
+/* ===== 答题页 ===== */
+function renderQ() {
+  const q = QUESTIONS[state.step];
+  $('q-count').textContent = state.step + 1;
+  $('progress-fill').style.width = (((state.step + 1) / N) * 100) + '%';
+  $('q-badge').textContent = 'Q' + (state.step + 1);
+  $('q-text').textContent = q.text;
+  $('q-options').innerHTML = q.options.map((o, i) =>
+    '<button class="option" style="--i:' + i + '" onclick="pick(' + i + ')">' +
+      '<span class="opt-letter">' + 'ABCD'[i] + '</span>' +
+      '<span>' + o.text + '</span>' +
+    '</button>'
+  ).join('');
+}
+
+function startTest() {
+  var birth = readBirth();
+  if (!birth) {
+    var card = $('birth-card');
+    card.classList.remove('birth-shake');
+    void card.offsetWidth;
+    card.classList.add('birth-shake');
+    toast('请先选择出生年月日，测试才能结合星座能量');
+    return;
+  }
+  state = { step: 0, answers: [], animating: false, result: null, birth: birth };
+  renderQ();
+  goto('view-quiz');
+}
+
+function retryTest() {
+  startTest();
+  toast('已重置，再来一次吧');
+}
+
+function goBack() {
+  if (state.animating) return;
+  if (state.answers.length === 0) { goto('view-home'); return; }
+  state.answers.pop();
+  state.step--;
+  const stage = $('q-stage');
+  stage.classList.add('out-rev');
+  setTimeout(() => {
+    stage.classList.remove('out-rev');
+    renderQ();
+    stage.classList.add('in');
+    setTimeout(() => stage.classList.remove('in'), 340);
+  }, 210);
+}
+
+function pick(i) {
+  if (state.animating) return;
+  state.answers.push(QUESTIONS[state.step].options[i].t);
+  if (state.step === N - 1) {
+    $('progress-fill').style.width = '100%';
+    showResult(compute());
+    return;
+  }
+  state.step++;
+  state.animating = true;
+  const stage = $('q-stage');
+  stage.classList.add('out');
+  setTimeout(() => {
+    stage.classList.remove('out');
+    renderQ();
+    stage.classList.add('in');
+    setTimeout(() => stage.classList.remove('in'), 340);
+    state.animating = false;
+  }, 220);
+}
+
+function compute() {
+  const tally = { sweet: 0, warm: 0, rational: 0, free: 0, sunny: 0, rock: 0 };
+  state.answers.forEach(t => tally[t]++);
+  const order = ['sweet', 'warm', 'rational', 'free', 'sunny', 'rock'];
+  const sorted = order.slice().sort((a, b) =>
+    (tally[b] - tally[a]) || (order.indexOf(a) - order.indexOf(b))
+  );
+  return { primary: sorted[0], secondary: sorted[1] };
+}
+
+/* ===== 结果页 ===== */
+function cardHTML(c, i, T, unlocked) {
+  const locked = c.locked && !unlocked;
+  const head = '<div class="rcard-head"><span class="rcard-dot" style="background:' +
+    (locked ? '#F3C9D8' : T.grad) + '"></span>' +
+    '<span class="rcard-title">' + c.title + '</span>' +
+    (locked ? '<span class="lock-ic">' + LOCK_SVG + '</span>' : '') +
+    '</div>';
+  const body = locked
+    ? '<div class="rcard-locked">' + LOCK_SVG + '<div><p>私信解锁后可见完整解读</p><p class="teaser">' + (c.teaser || '') + '</p></div></div>'
+    : '<div class="rcard-body">' + c.body + '</div>';
+  return '<div class="rcard' + (locked ? ' locked' : '') + '" style="--i:' + i + '"' +
+    (locked ? ' onclick="scrollToUnlock()"' : '') + '>' + head + body + '</div>';
+}
+function loveTipsHTML(unlocked, i) {
+  const head = '<div class="rcard-head"><span class="rcard-dot" style="background:' +
+    (unlocked ? '#F72585' : '#F3C9D8') + '"></span>' +
+    '<span class="rcard-title">爱情锦囊 · 双管齐下</span>' +
+    (unlocked ? '' : '<span class="lock-ic">' + LOCK_SVG + '</span>') +
+    '</div>';
+  if (!unlocked) {
+    const body = '<div class="rcard-locked">' + LOCK_SVG + '<div><p>私信解锁后可见完整解读</p><p class="teaser">解锁后查看：与你最合拍的人格 × 星座、TA 的共性密码、双管齐下行动指南，以及给 TA 的小确幸。</p></div></div>';
+    return '<div class="rcard locked" style="--i:' + i + '" onclick="scrollToUnlock()">' + head + body + '</div>';
+  }
+  const tip = LOVE_TIPS[state.result.primary] || LOVE_TIPS.sweet;
+  const body = '<div class="rcard-body">' +
+    '<p><b>与你最合拍：</b>' + tip.match + ' × ' + (state.birth ? (ZODIACS[state.birth.zodiac].best.join(' · ')) : tip.stars) + '</p>' +
+    '<p><b>TA 的共性密码</b></p>' +
+    tip.common.map(function (x) { return '<p>· ' + x + '</p>'; }).join('') +
+    '<p><b>恋爱锦囊 · 行动指南</b></p>' +
+    tip.tips.map(function (x) { return '<p>· ' + x + '</p>'; }).join('') +
+    '<p><b>给 TA 的小确幸</b></p>' +
+    tip.delight.map(function (x) { return '<p>· ' + x + '</p>'; }).join('') +
+    '</div>';
+  return '<div class="rcard" style="--i:' + i + '">' + head + body + '</div>';
+}
+function astroMatchHTML(unlocked, T, Z, i) {
+  const head = '<div class="rcard-head"><span class="rcard-dot" style="background:linear-gradient(135deg,#3DD6C4,#2EC4B6)"></span>' +
+    '<span class="rcard-title">星座 × 恋爱人格 · 综合匹配</span></div>';
+  if (!unlocked) {
+    const body = '<div class="rcard-locked">' + LOCK_SVG + '<div><p>私信解锁后可见完整解读</p><p class="teaser">你的星座能量最容易被哪类人格吸引？解锁后查看完整匹配指数与专属恋爱建议。</p></div></div>';
+    return '<div class="rcard locked" style="--i:' + i + '" onclick="scrollToUnlock()">' + head + body + '</div>';
+  }
+  const rows = ['sweet', 'warm', 'rational', 'free', 'sunny', 'rock'].map(k => {
+    const sc = Z.match[k];
+    return '<div class="astro-match-row"><span class="astro-match-name">' + TYPES[k].name + '</span>' +
+      '<span class="astro-match-track"><span class="astro-match-fill" style="background:' + TYPES[k].grad + ';width:' + sc + '%"></span></span>' +
+      '<span class="astro-match-pct">' + sc + '</span></div>';
+  }).join('');
+  const sorted = ['sweet', 'warm', 'rational', 'free', 'sunny', 'rock'].slice().sort((a, b) => Z.match[b] - Z.match[a]);
+  const fav = TYPES[sorted[0]].name, avoid = TYPES[sorted[5]].name;
+  const body = '<div class="astro-body">' +
+    '<p>' + Z.love + '</p>' +
+    '<p>' + Z.advice.replace('{P}', T.name) + '</p>' +
+    '<p>你的星座能量最容易被 <b>' + fav + '</b>吸引，最需要小心 <b>' + avoid + '</b>式的处事风格。</p>' +
+    '<div class="astro-match-title">星座能量匹配指数</div>' + rows +
+    '<span class="astro-animal">' + ANIMALS[state.birth.animal] + '</span>' +
+    '</div>';
+  return '<div class="rcard astro-card" style="--i:' + i + '">' + head + body + '</div>';
+}
+function astroHoroscopeHTML(unlocked, Z, i) {
+  const head = '<div class="rcard-head"><span class="rcard-dot" style="background:linear-gradient(135deg,#FFC98A,#FF8FAB)"></span>' +
+    '<span class="rcard-title">星座恋爱运势 · 详批</span>' +
+    (unlocked ? '' : '<span class="lock-ic">' + LOCK_SVG + '</span>') + '</div>';
+  if (unlocked) {
+    const body = '<div class="rcard-body">' +
+      '<p>' + Z.horoscope + '</p>' +
+      '<p>最合拍星座：<b style="color:#2A9D8F">' + Z.best.join('、') + '</b></p>' +
+      '<p>高危预警：<b style="color:#F72585">' + Z.warn.join('、') + '</b></p>' +
+      '</div>';
+    return '<div class="rcard astro-card" style="--i:' + i + '">' + head + body + '</div>';
+  }
+  const body = '<div class="rcard-locked">' + LOCK_SVG + '<div><p>私信解锁后可见完整解读</p><p class="teaser">解锁后可见：你的星座与哪 3 个星座最合拍、哪 2 个星座是“高危预警”，以及专属恋爱行动指南。</p></div></div>';
+  return '<div class="rcard locked" style="--i:' + i + '" onclick="scrollToUnlock()">' + head + body + '</div>';
+}
+function buildCards(unlocked) {
+  const T = TYPES[state.result.primary];
+  const Z = ZODIACS[state.birth ? state.birth.zodiac : 'aries'];
+  let out = '';
+  let idx = 0;
+  T.cards.forEach(c => {
+    if (!c.locked) { out += cardHTML(c, idx++, T, unlocked); }
+  });
+  out += loveTipsHTML(unlocked, idx++);
+  T.cards.forEach(c => {
+    if (c.locked) { out += cardHTML(c, idx++, T, unlocked); }
+  });
+  out += astroMatchHTML(unlocked, T, Z, idx++);
+  out += astroHoroscopeHTML(unlocked, Z, idx++);
+  return out;
+}
+function showResult(res) {
+  const T = TYPES[res.primary];
+  const S = TYPES[res.secondary];
+  state.result = res;
+  const badge = $('type-badge');
+  badge.textContent = T.char;
+  badge.style.background = T.grad;
+  $('type-name').textContent = T.name;
+  $('type-tagline').textContent = T.tagline;
+  $('hidden-type').innerHTML = '骨子里还藏着「<b style="background:' + S.grad + '">' + S.name + '</b>」的一面';
+  const tally = { sweet: 0, warm: 0, rational: 0, free: 0, sunny: 0, rock: 0 };
+  state.answers.forEach(t => tally[t]++);
+  $('type-bars').innerHTML = ['sweet', 'warm', 'rational', 'free', 'sunny', 'rock'].map(k => {
+    const pct = Math.round((tally[k] / N) * 100);
+    return '<div class="type-bar-row">' +
+      '<span class="type-bar-name">' + TYPES[k].char + ' ' + TYPES[k].name + '</span>' +
+      '<span class="type-bar-track"><span class="type-bar-fill" style="background:' + TYPES[k].grad + ';width:' + pct + '%"></span></span>' +
+      '<span class="type-bar-pct">' + pct + '%</span>' +
+    '</div>';
+  }).join('');
+  const bd = state.birth;
+  $('astro-badges').innerHTML = bd
+    ? '<span>' + ZODIACS[bd.zodiac].name + '</span><span>属' + ANIMAL_SHORT[bd.animal] + '</span>'
+    : '';
+  $('report-cards').innerHTML = buildCards(false);
+  try { localStorage.removeItem('love_report_unlocked_' + res.primary); } catch(e){}
+  var ub1 = $('unlock-box'); if (ub1 && window.__unlockBoxHTML) ub1.innerHTML = window.__unlockBoxHTML;
+  fillBless();
+  goto('view-result');
+  var sb0 = $('save-report-btn'); if (sb0) sb0.style.display = 'none';
+}
+
+function scrollToUnlock() {
+  const box = $('unlock-box');
+  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  box.classList.remove('pulse');
+  void box.offsetWidth;
+  box.classList.add('pulse');
+  toast('私信解锁剩余 6 条专属解读');
+}
+
+function copyText(v, okMsg) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(v).then(() => toast(okMsg || '已复制'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = v;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); toast(okMsg || '已复制'); }
+    catch (e) { toast('复制失败，请手动长按复制'); }
+    ta.remove();
+  }
+}
+
+/* ===== 分享朋友圈 ===== */
+const OPENERS = {
+  sweet: '黏人又高甜的「小奶糖」',
+  warm: '温柔到骨子里的「暖心大白」',
+  rational: '清醒又独立的「人间清醒」',
+  free: '来去如风的「野猫系」',
+  sunny: '自带阳光的「小太阳」',
+  rock: '沉稳可靠的「靠谱担当」'
+};
+function makeShareText() {
+  const s = TYPES[state.result.secondary];
+  const z = state.birth ? ZODIACS[state.birth.zodiac].name : '';
+  return '我是' + (z ? z + '×' : '') + OPENERS[state.result.primary] + '，骨子里还藏着「' + s.name + '」！星座能量+6条恋爱避坑预警，看完后背发凉。你也来测测？';
+}
+function copyShareText() {
+  copyText(makeShareText(), '分享文案已复制，去发朋友圈吧');
+}
+function isTouch(){ return !window.matchMedia('(hover: hover)').matches; }
+function saveBtn(n){
+  if(isTouch()){ toast('手机请长按上方对应图片，保存到相册'); return false; }
+  const img = $('#share-img-' + n);
+  const dataUrl = (img && img.src && img.src.indexOf('data:') === 0) ? img.src : '';
+  const nm = '恋爱人格测评-' + cardName(n) + '.png';
+  if(dataUrl){
+    doSave(dataUrl, nm);
+    return false;
+  }
+  if(!img){ toast('图片还没生成好，请稍等再点一次'); return false; }
+  if(!window.html2canvas){
+    toast('分享图库还没加载好，请稍等几秒再点');
+    return false;
+  }
+  toast('正在重新生成图片…');
+  fillShareCards();
+  waitImages($('share-card-' + n)).then(function(){
+    return html2canvas($('share-card-' + n), { scale: 2, useCORS: false, backgroundColor: '#FFF5F7' });
+  })
+    .then(function(canvas){
+      const url = canvas.toDataURL('image/png');
+      $(img).src = url;
+      doSave(url, nm);
+    })
+    .catch(function(){
+      toast('图片生成失败，请直接对图片右键「另存为」（手机长按保存）');
+    });
+  return false;
+}
+function doSave(dataUrl, name){
+  if(window.showSaveFilePicker){
+    saveViaPicker(dataUrl, name);
+  } else {
+    saveViaDirect(dataUrl, name);
+  }
+}
+function saveViaDirect(dataUrl, name){
+  try {
+    const a = document.createElement('a');
+    a.download = name; a.href = dataUrl;
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ a.remove(); }, 1000);
+    toast('已保存到默认下载文件夹。\n想弹窗选保存位置：Chrome 设置 → 下载 → 打开「下载前询问每个文件的保存位置」');
+  } catch(e){
+    toast('保存失败，请对图片右键「另存为」');
+  }
+}
+function saveViaPicker(dataUrl, name){
+  window.showSaveFilePicker({ suggestedName: name, types: [{ description: 'PNG 图片', accept: { 'image/png': ['.png'] } }] })
+    .then(function(fh){
+      const x = new XMLHttpRequest();
+      x.open('GET', dataUrl); x.responseType = 'blob';
+      x.onload = function(){
+        fh.createWritable().then(function(w){ return w.write(x.response).then(function(){ return w.close(); }); })
+          .then(function(){ toast('已保存：' + name); })
+          .catch(function(){ toast('保存失败，请重试'); });
+      };
+      x.onerror = function(){ toast('保存失败，请对图片右键「另存为」'); };
+      x.send();
+    })
+    .catch(function(e){
+      if(e && e.name === 'AbortError'){ toast('已取消保存'); }
+    });
+}
+function waitImages(el){
+  const imgs = el.querySelectorAll('img');
+  return Promise.all(Array.prototype.map.call(imgs, function(im){
+    if (im.complete && im.naturalWidth > 0) return Promise.resolve();
+    return new Promise(function(res){
+      im.addEventListener('load', function(){ res(); }, { once: true });
+      im.addEventListener('error', function(){ res(); }, { once: true });
+    });
+  }));
+}
+function captureCard(elId, imgId, name, linkId, scale){
+  const el = $(elId);
+  return waitImages(el).then(function(){
+    return html2canvas(el, { scale: scale || 2, useCORS: false, backgroundColor: '#FFF5F7' });
+  })
+    .then(function(canvas){
+      const url = canvas.toDataURL('image/png');
+      $(imgId).src = url;
+      const dl = $(linkId);
+      dl.href = url;
+      dl.download = name;
+    });
+}
+function clearShareCards(){
+  if(window.__shareHolder){
+    window.__shareHolder.parentNode.removeChild(window.__shareHolder);
+    window.__shareHolder = null;
+  }
+}
+function reportUnlocked(){
+  return !!(state.result && lsGet('love_report_unlocked_' + state.result.primary) === '1');
+}
+function cardName(n){
+  if (!reportUnlocked()) return n === 1 ? '结果卡' : '爱情锦囊';
+  return ['人格名片', '恋爱中的你', '爱情锦囊', '最佳匹配', '避坑指南', '7天行动卡'][n - 1];
+}
+function shareFoot(){
+  var qr = window.__qrData ? window.__qrData : '';
+  return '<div class="sc1-foot">' +
+    '<div class="sc1-line">解锁完整报告，恋爱避坑指南在手 →</div>' +
+    (qr ? '<div class="sc1-qr"><img src="' + qr + '" alt="二维码"></div>' : '<div class="sc1-word">小红书搜索「恋爱人格测评」</div>') +
+    '<div class="sc1-cta">开启你的专属恋爱测试</div>' +
+  '</div>';
+}
+function clipLi(li, max){
+  var t = li.replace(/破解：.*$/, '').replace(/<[^>]+>/g, '').trim();
+  if (t.length > max) t = t.slice(0, max) + '…';
+  return t;
+}
+function buildPreviewList(cnt){
+  var box = $('share-previews');
+  if (!box) return;
+  box.innerHTML = '';
+  var marks = ['①','②','③','④','⑤'];
+  for (var i = 1; i <= cnt; i++) {
+    var nm = cardName(i);
+    box.insertAdjacentHTML('beforeend',
+      '<p class="share-img-cap">' + marks[i - 1] + ' ' + nm + '</p>' +
+      '<div class="share-img-wrap"><img id="share-img-' + i + '" alt="' + nm + '分享卡" onclick="viewShareImg(' + i + ')" title="点击放大"></div>' +
+      '<a id="dl-link-' + i + '" class="btn btn-ghost" href="#" download="恋爱人格测评-' + nm + '.png" onclick="return saveBtn(' + i + ')">保存' + nm + '</a>');
+  }
+}
+const LOVE_LINES = {
+  sweet: '你给的糖，全世界都看得见。愿有人把你的每颗糖，都当珍宝收好。',
+  warm: '你把温柔都给了别人，这一次，请留一份给自己。',
+  rational: '你的清醒不是冷漠，是还没遇到值得破例的人。',
+  free: '你不是不在乎，只是怕被拴住。真正爱你的人，会陪你一起飞。',
+  sunny: '你把快乐分给全世界，愿有人把你的笑容单独珍藏。',
+  rock: '你把承诺都扛在肩上，愿有人看见你也会累，也值得被接住。'
+};
+const LOVE_TIPS = {
+  sweet: {
+    match: '暖心大白', stars: '金牛座 · 摩羯座 · 巨蟹座',
+    common: ['孝顺顾家，把家人看得比什么都重', '慢热专一，认定一个人就认真到底', '行动派，不说甜话但默默对你好'],
+    tips: [
+      'ta 很孝顺 → 多和 ta 父母建立关联：节日主动问候、见面带份小礼、真诚夸 ta 的父母',
+      'ta 慢热 → 主动表达喜欢、给足安全感，让 ta 确信你的心意',
+      'ta 行动派 → 少听情话多看行动，也用行动回应 ta 的好'
+    ],
+    delight: ['把 ta 随口提过的小愿望记下来，找机会悄悄实现', '睡前发一条专属晚安语音，让 ta 带着你的声音入睡']
+  },
+  warm: {
+    match: '人间清醒', stars: '金牛座 · 摩羯座 · 巨蟹座',
+    common: ['理性务实，认定就很认真', '事业心强，把承诺看得很重', '稳重孝顺，家庭观念重'],
+    tips: [
+      'ta 务实 → 少画饼多做事，答应的事一定做到',
+      'ta 事业心强 → 支持 ta 的工作节奏，做 ta 最安心的后盾',
+      'ta 看重承诺 → 重要时刻给足仪式感，让 ta 看到你的认真'
+    ],
+    delight: ['在 ta 加班晚归时，留一盏灯和一份热汤', '把 ta 随口说想买的小物件悄悄下单送到 ta 面前']
+  },
+  rational: {
+    match: '野猫系', stars: '双子座 · 天秤座 · 水瓶座',
+    common: ['自由独立，不喜欢被束缚', '爱憎分明，认定就很专一', '需要新鲜感，讨厌一成不变'],
+    tips: [
+      'ta 要自由 → 给空间不查岗，ta 反而更黏你',
+      'ta 爱憎分明 → 真诚不玩套路，ta 认定你就是一辈子',
+      'ta 要新鲜感 → 定期制造小惊喜，保持自己的精彩'
+    ],
+    delight: ['每周解锁一个没去过的约会地，制造新鲜感', '把 ta 的爱好悄悄变成你们共同的聊天话题']
+  },
+  free: {
+    match: '小奶糖', stars: '巨蟹座 · 双鱼座 · 狮子座',
+    common: ['热情直接，喜欢就大胆说', '需要回应，消息发出去就想被接住', '真诚敏感，恋爱脑但很认真'],
+    tips: [
+      'ta 要回应 → 消息及时回，想念大方说出口',
+      'ta 敏感 → 多肯定多夸，闹别扭别冷战',
+      'ta 真诚 → 带 ta 见朋友，给足安全感'
+    ],
+    delight: ['随时分享生活碎片，让 ta 参与你的每一天', '见面时带一份 ta 爱吃的甜品，小小的仪式感']
+  },
+  sunny: {
+    match: '小奶糖', stars: '白羊座 · 狮子座 · 射手座',
+    common: ['活泼直接，喜欢就大声说', '需要回应，热闹怕冷场', '真诚热烈，爱憎分明'],
+    tips: [
+      'ta 要回应 → 随时接住 ta 的热情，别让 ta 一个人嗨',
+      'ta 怕冷场 → 该认真时认真，让 ta 知道你不是只会玩',
+      'ta 真诚热烈 → 用行动回应 ta 的喜欢，别让 ta 的勇敢落空'
+    ],
+    delight: ['看到好笑的段子第一时间分享给 ta', '一起做一件「有点傻但很开心」的小事']
+  },
+  rock: {
+    match: '人间清醒', stars: '金牛座 · 摩羯座 · 处女座',
+    common: ['责任第一，认定就认真到底', '行动派，不说甜话但把事做稳', '不善表达，爱都藏在行动里'],
+    tips: [
+      'ta 重责任 → 答应的事一定做到，让 ta 看到你的靠谱',
+      'ta 行动派 → 少说情话多看行动，也用行动回应 ta 的好',
+      'ta 不善表达 → 主动表达你的在意，别让 ta 猜'
+    ],
+    delight: ['在 ta 加班时留一盏灯和一份热汤', '在 ta 家人面前真诚地夸 ta 一次']
+  }
+};
+const WEEK_ACTIONS = [
+  ['Day1', '今天给 TA 发一句：今天也想你'],
+  ['Day2', '点一杯 TA 最爱的奶茶，拍张照发过去'],
+  ['Day3', '睡前分享今天最开心的一件小事'],
+  ['Day4', '约一次不刷手机的散步，走慢一点'],
+  ['Day5', '认真夸 TA 一个具体的小细节'],
+  ['Day6', '把「你怎么不回我」换成「我有点想你了」'],
+  ['Day7', '和 TA 定一个只属于你们的小暗号']
+];
+function fillShareCards(){
+  if(!state.result) return;
+  clearShareCards();
+  const unlocked = reportUnlocked();
+  const nCards = unlocked ? 6 : 2;
+  const h = document.createElement('div');
+  h.style.cssText = 'position:fixed;left:0;top:0;width:750px;height:1334px;z-index:-9999;pointer-events:none';
+  var ids = '';
+  for (var k = 1; k <= nCards; k++) ids += '<div id="share-card-' + k + '" class="share-card-hidden"></div>';
+  h.innerHTML = ids;
+  document.body.appendChild(h);
+  window.__shareHolder = h;
+  const T = TYPES[state.result.primary];
+  const bd = state.birth;
+  const bars = ['sweet','warm','rational','free','sunny','rock'].map(function(k){
+    const pct = Math.round((state.answers.filter(function(a){return a===k;}).length / state.answers.length) * 100);
+    return '<div class="sc1-bar"><span class="sc1-bar-name">'+TYPES[k].char+' '+TYPES[k].name+'</span>'+
+      '<span class="sc1-bar-track"><span class="sc1-bar-fill" style="background:'+TYPES[k].grad+';width:'+pct+'%"></span></span>'+
+      '<span class="sc1-bar-pct">'+pct+'%</span></div>';
+  }).join('');
+  const p1 = T.cards[2] ? T.cards[2].body : '';
+  const qrImg = window.__qrData ? window.__qrData : '';
+  const qrHtml = qrImg ? '<div class="sc1-qr"><img src="' + qrImg + '" alt="二维码"></div>' : '<div class="sc1-word">小红书搜索「恋爱人格测评」</div>';
+  var tagHtml = '';
+  if (bd) {
+    var Zz = ZODIACS[bd.zodiac];
+    var es0 = luckyColor(bd);
+    var ln = luckyNums(bd);
+    tagHtml = '<div class="sc1-sec">我的个性标签</div><div class="sc1-kw"><div class="chips"><span class="sc1-lucky">幸运数字 ' + ln.join('·') + '</span><span class="sc1-lucky">幸运色 ' + es0.name + '</span></div></div>';
+  }
+  if (!unlocked) {
+    $('share-card-1').innerHTML =
+      '<div class="sc1">'+
+        '<div class="sc1-hero">'+
+          '<div class="sc1-badge" style="background:'+T.grad+'">'+T.char+'</div>'+
+          '<div class="sc1-name">'+T.name+'</div>'+
+          '<div class="sc1-tag">'+T.tagline+'</div>'+
+          '<div class="sc1-hidden">骨子里还藏着「'+TYPES[state.result.secondary].name+'」的一面</div>'+
+          (bd ? '<div class="sc1-astro">'+ZODIACS[bd.zodiac].name+' · 属'+ANIMAL_SHORT[bd.animal]+'</div>' : '')+
+        '</div>'+
+        '<div class="sc1-body">'+
+          '<div class="sc1-sec">人格占比</div>'+bars+
+          tagHtml+
+        '</div>'+
+        '<div class="sc1-unlock-bar">🔒 仅展示部分解读<br>解锁后查看全部 6 条专属恋爱报告</div>'+
+        '<div class="sc1-foot">'+
+          '<div class="sc1-line">测测你的恋爱小确幸，等你解锁 →</div>'+
+          qrHtml+
+          '<div class="sc1-cta">开启你的专属恋爱测试</div>'+
+        '</div>' +
+      '</div>';
+    /* 未解锁：锦囊卡锁定预览（引流不泄内容） */
+    $('share-card-2').innerHTML =
+      '<div class="sc6">'+
+        '<div class="sc6-head">爱情锦囊 · 双管齐下</div>'+
+        '<div class="sc6-lock">'+
+          '<div class="sc6-lock-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>'+
+          '<div class="sc6-lock-t">已锁定 · 解锁后可见</div>'+
+          '<div class="sc6-lock-sub">为你匹配最合拍的人格与星座，<br>解锁 TA 的共性密码与专属恋爱锦囊</div>'+
+        '</div>'+
+        '<div class="sc6-sec">解锁后你将看到</div>'+
+        '<div class="sc6-common">'+
+          '<p>与你最合拍的 TA · 人格 × 星座</p>'+
+          '<p>TA 的共性密码 · 3 条</p>'+
+          '<p>恋爱锦囊 · 双管齐下行动指南</p>'+
+          '<p>给 TA 的小确幸 · 惊喜指南</p>'+
+        '</div>'+
+        '<div class="sc1-unlock-bar">🔒 仅展示部分解读<br>解锁后查看全部 6 条专属恋爱报告</div>'+
+        '<div class="sc1-foot">'+
+          '<div class="sc1-line">测测你的恋爱小确幸，等你解锁 →</div>'+
+          qrHtml+
+          '<div class="sc1-cta">开启你的专属恋爱测试</div>'+
+        '</div>' +
+      '</div>';
+    return;
+  }
+  /* ===== 解锁版 5 张 ===== */
+  const p0 = T.cards[0] ? T.cards[0].body : '';
+  const pA = T.cards[1] ? T.cards[1].body : '';
+  const p2 = T.cards[2] ? T.cards[2].body : '';
+  const p3 = T.cards[3] ? T.cards[3].body : '';
+  const p5 = T.cards[5] ? T.cards[5].body : '';
+  const Z = bd ? ZODIACS[bd.zodiac] : null;
+  const foot = shareFoot();
+  /* 卡① 人格名片 */
+  $('share-card-1').innerHTML =
+    '<div class="sc1">'+
+      '<div class="sc1-hero">'+
+        '<div class="sc1-badge" style="background:'+T.grad+'">'+T.char+'</div>'+
+        '<div class="sc1-name">'+T.name+'</div>'+
+        '<div class="sc1-tag">'+T.tagline+'</div>'+
+        '<div class="sc1-hidden">骨子里还藏着「'+TYPES[state.result.secondary].name+'」的一面</div>'+
+        (bd ? '<div class="sc1-astro">'+ZODIACS[bd.zodiac].name+' · 属'+ANIMAL_SHORT[bd.animal]+'</div>' : '')+
+      '</div>'+
+      '<div class="sc1-body">'+
+        '<div class="sc1-sec">人格占比</div>'+bars+
+        tagHtml+
+        (p0 ? '<div class="sc1-kw">'+p0+'</div>' : '')+
+      '</div>'+foot+
+    '</div>';
+  /* 卡② 恋爱中的你 + 优势 */
+  $('share-card-2').innerHTML =
+    '<div class="sc2b">'+
+      '<div class="sc2b-head">恋爱中的你</div>'+
+      '<div class="sc2b-body">'+(pA || '')+'</div>'+
+      (p2 ? '<div class="sc2b-sec">你的恋爱优势</div><div class="sc2b-adv">'+p2+'</div>' : '')+
+      '<div class="sc2b-quote">爱不是先讲道理，是先抱住你；不是赢了这场架，是舍不得你难过。</div>'+
+      foot+
+    '</div>';
+  /* 卡③ 爱情锦囊 · 双管齐下 */
+  var tip = LOVE_TIPS[state.result.primary] || LOVE_TIPS.sweet;
+  $('share-card-3').innerHTML =
+    '<div class="sc6">'+
+      '<div class="sc6-head">爱情锦囊 · 双管齐下</div>'+
+      '<div class="sc6-match">与你最合拍：<b>'+tip.match+'</b> × '+(Z ? Z.best.join(' · ') : tip.stars)+'</div>'+
+      '<div class="sc6-sec">TA 的共性密码</div>'+
+      '<div class="sc6-common">'+tip.common.map(function(x){ return '<p>'+x+'</p>'; }).join('')+'</div>'+
+      '<div class="sc6-sec">恋爱锦囊 · 行动指南</div>'+
+      '<div class="sc6-tips">'+tip.tips.map(function(x){ return '<p>'+x+'</p>'; }).join('')+'</div>'+
+      '<div class="sc6-sec">给 TA 的小确幸</div>'+
+      '<div class="sc6-delight">'+tip.delight.map(function(x){ return '<p>'+x+'</p>'; }).join('')+'</div>'+
+      '<div class="sc6-love">'+LOVE_LINES[state.result.primary]+'</div>'+
+      foot+
+    '</div>';
+  /* 卡④ 最佳匹配 + 锦囊 + 告白 */
+  const teaser = (T.cards[3] && T.cards[3].teaser) ? T.cards[3].teaser : '';
+  const plain3 = p3 ? p3.replace(/<[^>]+>/g, '').trim() : '';
+  const detail = plain3 ? plain3.slice(0, 78) + (plain3.length > 78 ? '…' : '') : '';
+  var tips = '';
+  if (p5) {
+    tips = (p5.match(/<p>[\s\S]*?<\/p>/g) || []).slice(0, 3).map(function(x){
+      return '<p>' + x.replace(/<[^>]+>/g, '').trim() + '</p>';
+    }).join('');
+  }
+  $('share-card-4').innerHTML =
+    '<div class="sc3">'+
+      '<div class="sc3-head">最佳匹配人格</div>'+
+      (teaser ? '<div class="sc3-match">'+teaser+'</div>' : '')+
+      (detail ? '<div class="sc3-detail">'+detail+'</div>' : '')+
+      (tips ? '<div class="sc3-sec">脱单锦囊</div><div class="sc3-tips">'+tips+'</div>' : '')+
+      '<div class="sc3-love">'+LOVE_LINES[state.result.primary]+'</div>'+
+      foot+
+    '</div>';
+  /* 卡⑤ 避坑 + 运势 + 匹配指数 */
+  var warns = '';
+  if (T.cards[4]) {
+    warns = (T.cards[4].body.match(/<li>[\s\S]*?<\/li>/g) || []).slice(0, 4).map(function(x){
+      return '<div class="sc4-warn">'+clipLi(x, 27)+'</div>';
+    }).join('');
+  }
+  var mBars = '';
+  if (Z && Z.match) {
+    mBars = ['sweet','warm','rational','free','sunny','rock'].map(function(k){
+      return '<div class="sc4-bar"><span class="sc4-bar-name">'+TYPES[k].name+'</span>'+
+        '<span class="sc4-bar-track"><span class="sc4-bar-fill" style="width:'+Z.match[k]+'%"></span></span>'+
+        '<span class="sc4-bar-pct">'+Z.match[k]+'</span></div>';
+    }).join('');
+  }
+  const horo = (Z && Z.horoscope) ? Z.horoscope.slice(0, 66) + (Z.horoscope.length > 66 ? '…' : '') : '';
+  $('share-card-5').innerHTML =
+    '<div class="sc4">'+
+      '<div class="sc4-head">避坑指南 · 人间清醒</div>'+
+      (warns ? warns : '')+
+      (mBars ? '<div class="sc4-sec">星座 × 人格匹配指数</div>'+mBars : '')+
+      (horo ? '<div class="sc4-sec">星座恋爱运势</div><div class="sc4-horo">'+horo+'</div>' : '')+
+      foot+
+    '</div>';
+  /* 卡⑥ 7 天行动卡 */
+  const days = WEEK_ACTIONS.map(function(d){
+    return '<div class="sc5-day"><div class="sc5-badge">'+d[0]+'</div><div class="sc5-txt">'+d[1]+'</div></div>';
+  }).join('');
+  $('share-card-6').innerHTML =
+    '<div class="sc5">'+
+      '<div class="sc5-title">7 天恋爱行动卡</div>'+
+      '<div class="sc5-sub">专属于你 · 今天起，每天 10 秒，把爱变成习惯</div>'+
+      '<div class="sc5-days">'+days+'</div>'+
+      '<div class="sc5-quote">7 天后回来测测，看看你的恋爱人格变了没</div>'+
+      foot+
+    '</div>';
+}
+
+function shareResult() {
+  if (window.__shareBusy) { toast('正在生成分享卡，请稍等…'); return; }
+  const btn = $('btn-share');
+  btn.disabled = true;
+  window.__shareBusy = true;
+  $('share-text').textContent = makeShareText();
+  fillShareCards();
+  toast('正在生成分享卡片…');
+  const run = function(){
+    const cnt = reportUnlocked() ? 6 : 2;
+    buildPreviewList(cnt);
+    let chain = Promise.resolve();
+    for (var i = 1; i <= cnt; i++) {
+      chain = chain.then(function(idx){
+        return captureCard('share-card-' + idx, 'share-img-' + idx, '恋爱人格测评-' + cardName(idx) + '.png', 'dl-link-' + idx, 1.6);
+      }.bind(null, i));
+    }
+    chain.then(function(){ clearShareCards(); openModal(); })
+      .catch(function(){ clearShareCards(); toast('生成失败，请直接用手机截图'); })
+      .finally(function(){ btn.disabled = false; window.__shareBusy = false; });
+  };
+  setTimeout(function(){
+    if (!window.html2canvas) {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.8/dist/html2canvas-pro.min.js';
+      var done = false;
+      var timer = setTimeout(function(){ if (!done) { toast('网络慢，分享图库未加载，请直接用手机截图'); btn.disabled = false; } }, 8000);
+      s.onload = function(){ done = true; clearTimeout(timer); toast('图库加载完成，正在生成…'); run(); };
+      s.onerror = function(){ done = true; clearTimeout(timer); toast('请直接用手机截图保存分享'); btn.disabled = false; };
+      document.head.appendChild(s);
+      return;
+    }
+    run();
+  }, 350);
+}
+
+/* ===== 保存完整报告（解锁后） ===== */
+function reportEnergyHTML(){
+  var bd = state.birth;
+  if (!bd) return '';
+  var Z = ZODIACS[bd.zodiac], A = ANIMAL_SHORT[bd.animal];
+  var es = luckyColor(bd);
+  var arr = luckyNums(bd);
+  var zi = ZKEYS.indexOf(bd.zodiac);
+  var seed = bd.year * 10000 + bd.month * 100 + bd.day + zi * 7;
+  var score = ((seed * 9301 + 49297) % 233280) / 2332.8;
+  score = Math.round(score * 9) + 1;
+  var act = TODAY_ACTS[seed % TODAY_ACTS.length];
+  return '<div class="rp-energy">' +
+    '<div class="rp-en-title">能量名片 · ' + Z.sym + ' 属' + A + ' · ' + Z.name + '</div>' +
+    '<div class="rp-en-row"><span class="rp-en-tag">幸运数字</span><span class="rp-en-nums">' + arr.map(function(n){ return '<i>' + n + '</i>'; }).join('') + '</span></div>' +
+    '<div class="rp-en-row"><span class="rp-en-tag">幸运色</span><span class="rp-en-swatch" style="background:linear-gradient(135deg,' + es.sw[0] + ',' + es.sw[1] + ')"></span><span class="rp-en-cn">' + es.name + '</span></div>' +
+    '<div class="rp-en-row"><span class="rp-en-tag">今日恋爱能量</span><span class="rp-en-score">桃花指数 <b>' + score + '</b></span><span class="rp-en-bar"><i style="width:' + score + '%"></i></span></div>' +
+    '<div class="rp-en-hint">' + act + '</div>' +
+    '<div class="rp-en-key">恋爱关键词 · ' + KEYWORDS[bd.zodiac] + '</div>' +
+  '</div>';
+}
+function buildReportCards(){
+  clearReportCards();
+  const h = document.createElement('div');
+  h.style.cssText = 'position:fixed;left:0;top:0;width:750px;z-index:-9999;pointer-events:none';
+  h.innerHTML = '<div id="report-card-1" class="rp-wrap"></div><div id="report-card-2" class="rp-wrap"></div><div id="report-card-3" class="rp-wrap"></div>';
+  document.body.appendChild(h);
+  window.__reportHolder = h;
+  const hero = document.querySelector('.result-hero');
+  const cards = document.getElementById('report-cards');
+  $('report-card-1').innerHTML =
+    '<div class="rp1">' +
+      '<div class="rp-hero">' + (hero ? hero.innerHTML : '') + '</div>' +
+      reportEnergyHTML() +
+      shareFoot() +
+    '</div>';
+  const html = cards ? cards.innerHTML : '';
+  const parts = html.split(/(?=<div class="rcard")/).filter(function(s){ return s.trim(); });
+  const half = Math.ceil(parts.length / 2);
+  const s1 = parts.slice(0, half).join('');
+  const s2 = parts.slice(half).join('');
+  $('report-card-2').innerHTML =
+    '<div class="rp2">' +
+      '<div class="rp2-title">完整报告 · 专属你的恋爱解读（上）</div>' +
+      '<div class="rp2-sub">人格 · 优势 · 匹配 · 避坑 · 锦囊 · 星座运势 一次看全</div>' +
+      '<div class="rp2-cards">' + s1 + '</div>' +
+      shareFoot() +
+    '</div>';
+  $('report-card-3').innerHTML =
+    '<div class="rp2">' +
+      '<div class="rp2-title">完整报告 · 专属你的恋爱解读（下）</div>' +
+      '<div class="rp2-sub">避坑指南 · 7 天行动 · 星座运势</div>' +
+      '<div class="rp2-cards">' + s2 + '</div>' +
+      shareFoot() +
+    '</div>';
+}
+function clearReportCards(){
+  if (window.__reportHolder) {
+    window.__reportHolder.parentNode.removeChild(window.__reportHolder);
+    window.__reportHolder = null;
+  }
+}
+function buildReportPreview(){
+  var box = $('report-previews');
+  if (!box) return;
+  box.innerHTML = '';
+  var names = ['人格能量', '报告全览·上', '报告全览·下'];
+  var marks = ['①', '②', '③'];
+  for (var i = 1; i <= 3; i++) {
+    box.insertAdjacentHTML('beforeend',
+      '<p class="share-img-cap">' + marks[i - 1] + ' ' + names[i - 1] + '</p>' +
+      '<div class="share-img-wrap"><img id="report-img-' + i + '" alt="完整报告' + i + '" onclick="viewReportImg(' + i + ')" title="点击放大"></div>' +
+      '<a id="report-dl-' + i + '" class="btn btn-ghost" href="#" download="恋爱人格测评-完整报告' + i + '-' + names[i - 1] + '.png" onclick="return saveReportBtn(' + i + ')">保存' + names[i - 1] + '</a>');
+  }
+}
+function viewReportImg(n){
+  var im = $('report-img-' + n);
+  if (im && im.src) { $('share-viewer-img').src = im.src; $('share-viewer').classList.add('active'); }
+}
+function viewShareImg(n){
+  var im = $('share-img-' + n);
+  if (im && im.src) { $('share-viewer-img').src = im.src; $('share-viewer').classList.add('active'); }
+}
+function closeShareViewer(){ $('share-viewer').classList.remove('active'); }
+function openReportModal(){ $('report-modal').classList.add('active'); }
+function closeReportModal(){ $('report-modal').classList.remove('active'); }
+function saveReport(){
+  if (!reportUnlocked()) { toast('请先解锁完整报告'); return; }
+  if (!window.html2canvas) { toast('图库还没加载好，请稍等几秒再点'); return; }
+  if (window.__reportBusy) { toast('正在生成中，请稍等…'); return; }
+  window.__reportBusy = true;
+  const btn = $('save-report-btn');
+  if (btn) btn.disabled = true;
+  toast('正在生成完整报告图（约 3~6 秒）…');
+  try { buildReportCards(); buildReportPreview(); } catch(e) {
+    window.__reportBusy = false; if (btn) btn.disabled = false;
+    toast('生成组件异常，请刷新页面后重试'); return;
+  }
+  captureCard('report-card-1', 'report-img-1', '恋爱人格测评-完整报告1-人格能量.png', 'report-dl-1', 1.6)
+    .then(function(){
+      return captureCard('report-card-2', 'report-img-2', '恋爱人格测评-完整报告2-报告全览上.png', 'report-dl-2', 1.6);
+    })
+    .then(function(){
+      return captureCard('report-card-3', 'report-img-3', '恋爱人格测评-完整报告3-报告全览下.png', 'report-dl-3', 1.6);
+    })
+    .then(function(){ clearReportCards(); openReportModal(); toast('已生成 3 张，长按图片可保存'); })
+    .catch(function(){ clearReportCards(); toast('生成失败，请稍后重试或直接用手机截图'); })
+    .finally(function(){ window.__reportBusy = false; if (btn) btn.disabled = false; });
+}
+function saveReportBtn(n){
+  if (isTouch()) { toast('手机请长按上方对应图片，保存到相册'); return false; }
+  const img = $('report-img-' + n);
+  const dataUrl = (img && img.src && img.src.indexOf('data:') === 0) ? img.src : '';
+  if (dataUrl) { doSave(dataUrl, '恋爱人格测评-完整报告' + n + '.png'); return false; }
+  if (!img) { toast('图片还没生成好，请稍等再点一次'); return false; }
+  if (!window.html2canvas) { toast('分享图库还没加载好，请稍等几秒再点'); return false; }
+  toast('正在重新生成图片…');
+  buildReportCards();
+  waitImages($('report-card-' + n)).then(function(){
+    return html2canvas($('report-card-' + n), { scale: 1.6, useCORS: false, backgroundColor: '#FFF5F7' });
+  }).then(function(canvas){
+    const url = canvas.toDataURL('image/png');
+    $(img).src = url;
+    doSave(url, '恋爱人格测评-完整报告' + n + '.png');
+  }).catch(function(){
+    toast('生成失败，请直接对图片右键「另存为」（手机长按保存）');
+  });
+  return false;
+}
+
+function openModal() { $('share-modal').classList.add('active'); }
+function closeModal() { $('share-modal').classList.remove('active'); }
+
+/* ===== 口令解锁完整报告 ===== */
+/* 解锁码设置说明（就在这里改，上线前务必替换示例码）：
+   每个客户 = 一行，发给他一个专属码 code，可随时增删。
+   max = 该码最多可解锁几次（每个码按设备累计，用满自动作废）。
+   note = 你自己的备注，方便记住是哪个客户，页面不显示。
+   示例：{ code: 'abcd1234', max: 2, note: '客户：昵称/日期' }
+   注意：计数存在客户手机本地，防转发滥用；清缓存或换设备可重新使用，属正常损耗。 */
+const UNLOCK_CODES_ENC = {"k": 7, "list": [[[90, 98, 90, 98, 90, 98], 99999, "本人测试专用 · 长期有效"], [[100, 98, 108, 108, 49, 44], 1, "付费/10.14-1 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[102, 104, 104, 103, 50, 49], 1, "付费/10.14-2 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 104, 95, 109, 43, 50], 1, "付费/10.14-3 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[92, 97, 94, 107, 107, 114, 44, 47], 1, "付费/10.14-4 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[112, 90, 107, 102, 44, 44], 1, "付费/10.14-5 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 109, 90, 107, 49, 50], 1, "付费/10.14-6 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[92, 110, 109, 94, 47, 47], 1, "付费/10.14-7 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[102, 104, 104, 103, 45, 44], 1, "付费/10.14-8 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[101, 110, 92, 100, 114, 46, 45], 1, "付费/10.14-9 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 104, 95, 109, 49, 50], 1, "付费/10.14-10 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[112, 90, 107, 102, 45, 45], 1, "付费/10.15-1 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[105, 98, 103, 100, 43, 47], 1, "付费/10.15-2 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[90, 103, 96, 94, 101, 47, 45], 1, "付费/10.15-3 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[100, 98, 108, 108, 47, 46], 1, "付费/10.15-4 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[91, 94, 90, 107, 46, 47], 1, "付费/10.15-5 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 112, 94, 94, 109, 43, 43], 1, "付费/10.15-6 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[112, 90, 107, 102, 47, 44], 1, "付费/10.15-7 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[97, 94, 90, 107, 109, 45, 47], 1, "付费/10.15-8 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[97, 110, 96, 49, 49], 1, "付费/10.15-9 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[112, 90, 107, 102, 46, 50], 1, "付费/10.15-10 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[93, 107, 94, 90, 102, 44, 50], 1, "付费/10.15-1 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[90, 103, 96, 94, 101, 44, 48], 1, "付费/10.15-2 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 110, 103, 103, 114, 45, 48], 1, "付费/10.15-3 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 109, 90, 107, 45, 44], 1, "付费/10.15-4 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[100, 98, 108, 108, 46, 44], 1, "付费/10.15-5 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[92, 97, 94, 107, 107, 114, 45, 50], 1, "付费/10.15-6 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[92, 97, 94, 107, 107, 114, 47, 50], 1, "付费/10.15-7 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 109, 90, 107, 45, 50], 1, "付费/10.15-8 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[93, 107, 94, 90, 102, 45, 43], 1, "付费/10.15-9 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[97, 110, 96, 43, 47], 1, "付费/10.15-10 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[90, 103, 96, 94, 101, 45, 50], 1, "付费/10.15-1 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 110, 103, 103, 114, 45, 49], 1, "付费/10.15-2 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[101, 104, 111, 94, 45, 47], 1, "付费/10.15-3 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[92, 90, 103, 93, 114, 45, 46], 1, "付费/10.15-4 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[97, 104, 103, 94, 114, 47, 43], 1, "付费/10.15-5 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 112, 94, 94, 109, 47, 43], 1, "付费/10.15-6 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[112, 90, 107, 102, 47, 45], 1, "付费/10.15-7 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[101, 110, 92, 100, 114, 43, 50], 1, "付费/10.15-8 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[90, 103, 96, 94, 101, 43, 48], 1, "付费/10.15-9 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[102, 104, 104, 103, 50, 48], 1, "付费/10.15-10 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 110, 103, 103, 114, 46, 44], 1, "付费/10.15-1 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[90, 103, 96, 94, 101, 46, 47], 1, "付费/10.15-2 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[92, 110, 109, 94, 48, 45], 1, "付费/10.15-3 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[97, 104, 103, 94, 114, 47, 49], 1, "付费/10.15-4 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 112, 94, 94, 109, 44, 50], 1, "付费/10.15-5 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 104, 95, 109, 46, 46], 1, "付费/10.15-6 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 104, 95, 109, 50, 43], 1, "付费/10.15-7 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[105, 98, 103, 100, 49, 47], 1, "付费/10.15-8 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 110, 103, 103, 114, 46, 47], 1, "付费/10.15-9 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[100, 98, 108, 108, 49, 49], 1, "付费/10.15-10 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 112, 94, 94, 109, 48, 48], 1, "付费/10.15-1 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[112, 90, 107, 102, 47, 49], 1, "付费/10.15-2 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[107, 104, 108, 94, 49, 46], 1, "付费/10.15-3 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[92, 97, 94, 107, 107, 114, 47, 43], 1, "付费/10.15-4 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[112, 90, 107, 102, 46, 45], 1, "付费/10.15-5 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[92, 110, 109, 94, 48, 49], 1, "付费/10.15-6 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[93, 107, 94, 90, 102, 45, 46], 1, "付费/10.15-7 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[93, 107, 94, 90, 102, 47, 49], 1, "付费/10.15-8 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[102, 104, 104, 103, 47, 48], 1, "付费/10.15-9 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[97, 104, 103, 94, 114, 45, 50], 1, "付费/10.15-10 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[101, 104, 111, 94, 47, 43], 1, "付费/10.15-1 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[101, 110, 92, 100, 114, 44, 49], 1, "付费/10.15-2 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[97, 94, 90, 107, 109, 44, 48], 1, "付费/10.15-3 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[97, 104, 103, 94, 114, 47, 50], 1, "付费/10.15-4 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[108, 104, 95, 109, 45, 44], 1, "付费/10.15-5 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[93, 107, 94, 90, 102, 43, 47], 1, "付费/10.15-6 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[92, 90, 103, 93, 114, 49, 49], 1, "付费/10.15-7 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[92, 110, 109, 94, 45, 47], 1, "付费/10.15-8 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[100, 98, 108, 108, 44, 44], 1, "付费/10.15-9 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[105, 98, 103, 100, 45, 49], 1, "付费/10.15-10 · 1 单 1 码 · 长期有效 · 绑定客户名"], [[102, 104, 104, 103, 49, 47], 1, "引流/10.15-1 · 公开渠道 · 日更 1 个 · 24h 有效"], [[105, 98, 103, 100, 50, 49], 1, "引流/10.15-2 · 公开渠道 · 日更 1 个 · 24h 有效"], [[108, 104, 95, 109, 47, 50], 1, "引流/10.15-3 · 公开渠道 · 日更 1 个 · 24h 有效"], [[108, 112, 94, 94, 109, 50, 49], 1, "引流/10.15-4 · 公开渠道 · 日更 1 个 · 24h 有效"], [[112, 90, 107, 102, 43, 49], 1, "引流/10.15-5 · 公开渠道 · 日更 1 个 · 24h 有效"], [[92, 97, 94, 107, 107, 114, 45, 45], 1, "引流/10.15-6 · 公开渠道 · 日更 1 个 · 24h 有效"], [[92, 110, 109, 94, 45, 49], 1, "引流/10.15-7 · 公开渠道 · 日更 1 个 · 24h 有效"], [[91, 94, 90, 107, 44, 49], 3, "付费/10.15-1 · 1 单 1 码 · 长期有效 · 可解锁 3 次"], [[107, 104, 108, 94, 49, 44], 3, "付费/10.15-2 · 1 单 1 码 · 长期有效 · 可解锁 3 次"], [[100, 98, 108, 108, 44, 43], 3, "付费/10.15-3 · 1 单 1 码 · 长期有效 · 可解锁 3 次"], [[97, 94, 90, 107, 109, 44, 49], 3, "付费/10.15-4 · 1 单 1 码 · 长期有效 · 可解锁 3 次"], [[105, 98, 103, 100, 46, 44], 3, "付费/10.15-5 · 1 单 1 码 · 长期有效 · 可解锁 3 次"], [[93, 107, 94, 90, 102, 43, 43], 3, "付费/10.15-6 · 1 单 1 码 · 长期有效 · 可解锁 3 次"], [[97, 104, 103, 94, 114, 50, 46], 3, "付费/10.15-7 · 1 单 1 码 · 长期有效 · 可解锁 3 次"], [[92, 90, 103, 93, 114, 49, 43], 3, "付费/10.15-8 · 1 单 1 码 · 长期有效 · 可解锁 3 次"], [[102, 104, 104, 103, 44, 46], 3, "付费/10.15-9 · 1 单 1 码 · 长期有效 · 可解锁 3 次"], [[108, 112, 94, 94, 109, 45, 43], 3, "付费/10.15-10 · 1 单 1 码 · 长期有效 · 可解锁 3 次"], [[91, 94, 90, 107, 48, 49], 3, "裂变/10.15-1 · 老客分享闺蜜 · 7 天有效"], [[108, 112, 94, 94, 109, 48, 43], 3, "裂变/10.15-2 · 老客分享闺蜜 · 7 天有效"], [[108, 110, 103, 103, 114, 47, 44], 3, "裂变/10.15-3 · 老客分享闺蜜 · 7 天有效"], [[112, 90, 107, 102, 50, 45], 3, "裂变/10.15-4 · 老客分享闺蜜 · 7 天有效"], [[97, 104, 103, 94, 114, 49, 48], 3, "裂变/10.15-5 · 老客分享闺蜜 · 7 天有效"]]};
+var UNLOCK_CODES = (function () {
+  var enc = UNLOCK_CODES_ENC;
+  return enc.list.map(function (it) {
+    return { code: it[0].map(function (c) { return String.fromCharCode(c + enc.k); }).join(""), max: it[1], note: it[2] };
+  });
+})();
+
+function consumeCode(code) {
+  const entry = UNLOCK_CODES.filter(c => c.code === code)[0];
+  if (!entry) { return { ok: false, msg: '口令不正确，请核对后重试' }; }
+  const used = parseInt(lsGet('unlock_used_' + entry.code), 10) || 0;
+  if (used >= entry.max) { return { ok: false, msg: '该口令已用完（' + entry.max + ' 次），请私信联系商家获取新口令' }; }
+  lsSet('unlock_used_' + entry.code, String(used + 1));
+  return { ok: true, used: used + 1, max: entry.max };
+}
+function unlockReport() {
+  const input = $('unlock-code');
+  const hint = $('unlock-hint');
+  if (!input) { return; }
+  const code = (input.value || '').replace(/\s+/g, '').toLowerCase();
+  if (!code) { if (hint) hint.textContent = '请输入解锁口令'; return; }
+  const r = consumeCode(code);
+  if (!r.ok) { if (hint) hint.textContent = r.msg; return; }
+  lsSet('love_report_unlocked_' + state.result.primary, '1');
+  revealReport();
+  toast('解锁成功，愿你的恋爱又甜又稳');
+}
+
+function revealReport() {
+  var sb = $('save-report-btn'); if (sb) sb.style.display = 'block';
+  $('report-cards').innerHTML = buildCards(true);
+  fillBless();
+  const box = $('unlock-box');
+  box.innerHTML =
+    '<div class="unlock-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#2A9D8F"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' +
+    '<span>完整报告已解锁</span></div>' +
+    '<p class="unlock-desc" style="color:#2A9D8F">感谢支持 · 愿你的恋爱又甜又稳</p>';
+}
+
+/* ===== 恋爱小确幸 · 数据与逻辑 ===== */
+const JEWELRY = {
+  sweet:{ style:'甜系小心机：粉水晶单圈手串，招桃花、缘分自来', items:['粉水晶 · 单圈手串','红绳 · 同心结手链'], hint:'弹力绳免尺寸，日常百搭，约会出片' },
+  warm:{ style:'暖调守护系：月光石细链小吊坠，温柔又耐看', items:['月光石 · 细链吊坠','白水晶 · 平安扣挂件'], hint:'轻巧贴身，洗澡睡觉都不用摘' },
+  rational:{ style:'极简能量款：黑曜石单圈手串，挡小人不内耗', items:['黑曜石 · 单圈手串','素银 · 字母小吊坠'], hint:'低调有品，细节见审美' },
+  free:{ style:'自由能量款：紫水晶单圈手串，不被定义', items:['紫水晶 · 单圈手串','绿幽灵 · 钥匙扣小挂件'], hint:'随手一戴就有记忆点，通勤也好搭' },
+  sunny:{ style:'元气能量款：虎眼石编织手串，越戴越有能量', items:['虎眼石 · 编织手串','黄水晶 · 转运小挂件'], hint:'亮眼有活力，拍照也上镜' },
+  rock:{ style:'沉稳守护款：青金石单圈手串，定心定神', items:['青金石 · 单圈手串','银灰 · 极简尾戒'], hint:'低调耐看，谈事见客户都稳' }
+};
+const FIELD = {
+  sweet:{ color:'樱花粉', stone:'粉水晶', scent:'草莓甜香', pos:'左手腕 · 单圈手串，免调节' },
+  warm:{ color:'暖杏色', stone:'月光石', scent:'白茶花香', pos:'锁骨 · 细链小吊坠' },
+  rational:{ color:'雾霾蓝', stone:'蓝纹玛瑙', scent:'雪松木香', pos:'右手腕 · 单圈手串' },
+  free:{ color:'薄荷绿', stone:'绿幽灵', scent:'柑橘果香', pos:'背包 · 钥匙扣小挂件' },
+  sunny:{ color:'暖阳橙', stone:'虎眼石', scent:'蜜桃甜香', pos:'左手腕 · 编织手串' },
+  rock:{ color:'深海蓝', stone:'青金石', scent:'雪松木质调', pos:'右手腕 · 单圈手串' }
+};
+const BOXES = [
+  { t:'今天你值得被偏爱：早点睡，梦里会有甜甜的事。', act:'行动：给 TA 发一句「今天也想你」' },
+  { t:'你笑起来的弧度，是今天宇宙里最温柔的光。', act:'行动：拍一张天空或咖啡的照片发给 TA' },
+  { t:'爱别人的前提，是先把自己哄好。', act:'行动：今晚给自己点一杯喜欢的奶茶' },
+  { t:'有人正在赶来的路上，先把自己养得闪闪发光。', act:'行动：把手机壁纸换成让自己开心的图' },
+  { t:'你的敏感不是缺点，是看清人心的超能力。', act:'行动：写下 3 件今天让你开心的小事' },
+  { t:'恋爱里最甜的四个字不是「我爱你」，是「有我在」。', act:'行动：今天对 TA 说一句「有我在」' },
+  { t:'你不是没人爱，只是还没遇到懂你边界的人。', act:'行动：删掉一条让你内耗的聊天记录' },
+  { t:'今天的好运正在路上，先收下这朵云的心情。', act:'行动：出门晒 5 分钟太阳，顺手拍张照' },
+  { t:'会撒娇不是幼稚，是清楚自己被宠着。', act:'行动：今晚给 TA 发一个可可爱爱的表情' },
+  { t:'安全感一半靠对方，一半靠自己稳稳兜住。', act:'行动：整理一下房间，给心情减负' },
+  { t:'你不需要变成谁，就已经是某个人眼里的宝藏。', act:'行动：给自己买一朵花或一个小礼物' },
+  { t:'所有错过的，都是为了让对的人准点到场。', act:'行动：把旧备注改成名字，然后真的放下' }
+];
+const ST_TAGS = {
+  sweet:['秒回星人','高甜浓度'], warm:['温柔结界','情绪按摩师'],
+  rational:['边界感大师','清醒恋爱脑'], free:['自由灵魂','气氛担当'],
+  sunny:['快乐源泉','段子手'], rock:['定盘星','说到做到']
+};
+const ST_GRADS = [
+  'linear-gradient(135deg,#FF9EB5,#FF5C8A)',
+  'linear-gradient(135deg,#FFD3A3,#FF8FAB)',
+  'linear-gradient(135deg,#7FD8BE,#3DD6C4)',
+  'linear-gradient(135deg,#7FC8F8,#4A90D9)',
+  'linear-gradient(135deg,#FFD86B,#FF9F45)',
+  'linear-gradient(135deg,#9FD0E0,#4E8BB8)'
+];
+const LETTER_T = {
+  sweet:[
+    '{n}，你一出现，',
+    '我的消息列表就自动置顶，',
+    '连呼吸都在练习「怎么回你」。'
+  ],
+  warm:[
+    '{n}，世界很大很吵，',
+    '但每次你回头找我，',
+    '我都想把温柔全部给你。'
+  ],
+  rational:[
+    '{n}，我不太会说情话，',
+    '但我把所有「算了」换成「我来」，',
+    '把心动写进了每一个决定里。'
+  ],
+  free:[
+    '{n}，我本是一阵自由的风，',
+    '遇见你之后，',
+    '开始偷偷研究「家」的方向。'
+  ],
+  sunny:[
+    '{n}，世界偶尔阴天，',
+    '但想到你，',
+    '我连走路都在哼歌。'
+  ],
+  rock:[
+    '{n}，我不太会说情话，',
+    '但以后的风雨，',
+    '我都想站你前面。'
+  ]
+};
+
+function fillBless() {
+  const T = TYPES[state.result.primary];
+  const zn = state.birth ? ZODIACS[state.birth.zodiac].name : '十二星座';
+  const unlocked = lsGet('love_report_unlocked_' + state.result.primary) === '1';
+  const JB = $('jewel-btn'), FB = $('field-btn'), BB = $('box-btn');
+  if (unlocked) {
+    const J = JEWELRY[state.result.primary];
+    $('jewelry-body').innerHTML =
+      '<p><b>' + T.name + '</b> 遇上 ' + zn + '：' + J.style + '</p>' +
+      '<p>为你精选：' + J.items.map(function (x) { return '「' + x + '」'; }).join('、') + '</p>' +
+      '<p>搭配提示：' + J.hint + '</p>';
+    const F = FIELD[state.result.primary];
+    $('field-body').innerHTML =
+      '<p>幸运色 <b>' + F.color + '</b> · 能量石 <b>' + F.stone + '</b></p>' +
+      '<p>香调：' + F.scent + ' · 佩戴方位：' + F.pos + '</p>';
+    if (JB) { JB.setAttribute('onclick', 'buyTip()'); JB.textContent = 'get 同款 · 私信我'; }
+    if (FB) { FB.setAttribute('onclick', 'buyTip()'); FB.textContent = 'get 能量物 · 私信我'; }
+    $('box-stage').innerHTML = '<p class="box-closed">今天的惊喜还没拆开<br>点下方按钮，开一个恋爱小确幸</p>';
+    BB.textContent = '开启今日盲盒';
+    BB.setAttribute('onclick', 'openBox()');
+  } else {
+    $('jewelry-body').innerHTML = '<p class="bless-lock">解锁完整报告后，可见你的专属首饰搭配</p>';
+    $('field-body').innerHTML = '<p class="bless-lock">解锁完整报告后，可见你的能量磁场方案</p>';
+    if (JB) { JB.setAttribute('onclick', 'scrollToUnlock()'); JB.textContent = '去解锁'; }
+    if (FB) { FB.setAttribute('onclick', 'scrollToUnlock()'); FB.textContent = '去解锁'; }
+    $('box-stage').innerHTML = '<p class="box-closed">解锁完整报告后，开启今日盲盒</p>';
+    BB.setAttribute('onclick', 'scrollToUnlock()');
+    BB.textContent = '去解锁';
+  }
+  const keys = ['sweet', 'warm', 'rational', 'free', 'sunny', 'rock'];
+  $('sticker-grid').innerHTML = keys.map(function (k, idx) {
+    const t = TYPES[k];
+    return '<div class="sticker" style="background:' + ST_GRADS[idx] + '">' +
+      '<div class="st-tags">' + ST_TAGS[k].join(' · ') + '</div>' +
+      '<div><div class="st-char">' + t.char + '</div>' +
+      '<div class="st-name">' + t.name + (k === state.result.primary ? ' · 本命' : '') + '</div></div>' +
+      '<div class="st-zodiac">' + zn + '</div></div>';
+  }).join('');
+}
+
+function openAny(id) { document.getElementById(id).classList.add('active'); }
+function closeAny(id) { document.getElementById(id).classList.remove('active'); }
+
+/* 今日盲盒 */
+function boxKey() {
+  const d = new Date();
+  return 'love_box_' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+}
+function boxToday() {
+  const d = new Date();
+  const day = d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+  const i = ((day * 9301 + 49297) % 233280) % BOXES.length;
+  return BOXES[i];
+}
+function openBox() {
+  const b = boxToday();
+  $('box-stage').innerHTML =
+    '<div class="box-open"><p class="box-text">' + b.t + '</p><p class="box-act">' + b.act + '</p></div>';
+  $('box-btn').textContent = '再开一次（今日内容不变）';
+  toast('开出了今日份小确幸');
+}
+
+/* 三行情书 */
+function copyLetter() {
+  copyText(document.getElementById('lc-text').textContent, '情书已复制');
+}
+function makeLetter() {
+  const nm = ($('letter-name').value || '').trim();
+  if (!nm) { toast('先输入 TA 的名字'); return; }
+  const T = TYPES[state.result.primary];
+  const zn = state.birth ? ZODIACS[state.birth.zodiac].name : '十二星座';
+  const lines = LETTER_T[state.result.primary].map(function (l) { return l.replace('{n}', nm); });
+  const card = $('letter-card');
+  card.innerHTML = '<div class="lc-poem" id="lc-text">' + nm + '：<br>' + lines.join('<br>') + '</div>' +
+    '<div class="lc-sign">—— 你的 ' + zn + ' × ' + T.name + '</div>';
+  card.classList.add('on');
+  $('letter-actions').innerHTML =
+    '<button class="bless-btn" onclick="saveLetter()">生成情书卡片保存</button>' +
+    '<button class="bless-btn" onclick="copyLetter()">复制情书</button>';
+}
+function saveLetter() {
+  doCapture('letter-card', '三行情书-' + (state.birth ? ZODIACS[state.birth.zodiac].name : '') + TYPES[state.result.primary].name + '.png');
+}
+
+/* 情侣默契 */
+function makeMateText() {
+  const T = TYPES[state.result.primary];
+  return '我测出恋爱人格是「' + T.name + '」，敢不敢也来测你的？测完互换人格，看看我们是不是灵魂伴侣。';
+}
+function mateQrUrl() {
+  var h = location.href || '';
+  if (h.indexOf('file:') === 0) return '';
+  return h;
+}
+function loadQrLib(cb) {
+  if (window.QRCode) { cb(true); return; }
+  var s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
+  s.onload = function () { cb(true); };
+  s.onerror = function () { cb(false); };
+  document.head.appendChild(s);
+}
+function openMate() {
+  const T = TYPES[state.result.primary];
+  const S = TYPES[state.result.secondary];
+  const zn = state.birth ? ZODIACS[state.birth.zodiac].name : '十二星座';
+  $('mate-card').innerHTML =
+    '<div class="mc-title">默契挑战 · 敢不敢来</div>' +
+    '<span class="mc-badge">' + zn + ' × ' + T.name + '</span>' +
+    '<div class="mc-line">我测出了「' + T.name + '」，骨子里还藏着「' + S.name + '」<br>敢不敢也测一测，看我们合不合？</div>' +
+    '<div class="mc-line">测完互相报人格，<b style="color:#2A9D8F">回到这个页面就能算默契值</b></div>' +
+    '<div class="mc-wx">来测测你的恋爱人格，看我们合不合</div>';
+  $('mate-text').textContent = makeMateText();
+  $('mate-card').insertAdjacentHTML('beforeend', '<div style="margin-top:14px;"><img id="mate-qr-img" alt="测试入口二维码" style="width:132px;height:132px;border-radius:10px;background:#fff;padding:6px;border:1px solid #FFD3E0;display:inline-block;"><div id="mate-qr-tip" style="font-size:12px;color:#B23A5F;margin-top:6px;font-weight:600;">长按识别二维码 · 测出你的恋爱人格</div></div>');
+  var _qurl = mateQrUrl();
+  if (_qurl) {
+    loadQrLib(function (ok) {
+      if (!ok) { return; }
+      try { var _qr = qrcode(0, 'M'); _qr.addData(_qurl); _qr.make(); var _gif = _qr.createDataURL(6, 4); var _img = new Image(); _img.onload = function () { var _cv = document.createElement('canvas'); _cv.width = _img.width; _cv.height = _img.height; _cv.getContext('2d').drawImage(_img, 0, 0); var _im = $('mate-qr-img'); if (_im) _im.src = _cv.toDataURL('image/png'); }; _img.src = _gif; } catch (e) {}
+    });
+  } else {
+    var _im = $('mate-qr-img'), _tp = $('mate-qr-tip');
+    if (_im) _im.style.display = 'none';
+    if (_tp) _tp.textContent = '在手机上打开测试页后，此处自动生成扫码入口';
+  }
+  openAny('mate-modal');
+}
+function copyMateText() {
+  copyText(makeMateText(), '邀请文案已复制，发给 TA 吧');
+}
+function saveMateCard() {
+  var name = '默契邀请卡-' + (state.birth ? ZODIACS[state.birth.zodiac].name : '') + TYPES[state.result.primary].name + '.png';
+  if (isTouch()) {
+    doCapture('mate-card', name, function (dataUrl) {
+      var pv = $('mate-preview'), im = $('mate-preview-img');
+      if (pv && im) { im.src = dataUrl; pv.style.display = 'block'; toast('图片已生成，长按图片保存到相册'); }
+      else { saveBlobUrl(dataUrl, name); }
+    });
+  } else {
+    doCapture('mate-card', name);
+  }
+}
+const MATE_PAIR = {
+  sweet_sweet: 96, warm_warm: 94, rational_rational: 90, free_free: 95, sunny_sunny: 92, rock_rock: 93,
+  sweet_warm: 88, warm_sweet: 88, rational_free: 92, free_rational: 92,
+  sweet_free: 76, free_sweet: 76, warm_rational: 78, rational_warm: 78,
+  sweet_rational: 72, rational_sweet: 72, warm_free: 65, free_warm: 65,
+  sweet_sunny: 90, sunny_sweet: 90, sweet_rock: 70, rock_sweet: 70,
+  warm_sunny: 80, sunny_warm: 80, warm_rock: 90, rock_warm: 90,
+  rational_sunny: 64, sunny_rational: 64, rational_rock: 86, rock_rational: 86,
+  free_sunny: 84, sunny_free: 84, free_rock: 58, rock_free: 58,
+  sunny_rock: 78, rock_sunny: 78
+};
+function calcMate() {
+  const theirs = $('mate-type').value;
+  const mine = state.result.primary;
+  let score = MATE_PAIR[mine + '_' + theirs] || 70;
+  let zm = 60;
+  if (state.birth) { zm = ZODIACS[state.birth.zodiac].match[theirs] || 60; score += Math.round((zm - 50) / 5); }
+  score = Math.max(40, Math.min(99, score));
+  let lv, txt;
+  if (score >= 90) { lv = '灵魂共鸣级'; txt = '你们是彼此的充电宝：一个负责热烈，一个负责懂得，好好珍惜。'; }
+  else if (score >= 78) { lv = '默契拍档级'; txt = '互补又合拍，节奏对得上，剩下的交给时间慢慢磨。'; }
+  else if (score >= 65) { lv = '心动磨合级'; txt = '吸引是真的，功课也是真的——先学会表达，再谈长久。'; }
+  else { lv = '谨慎观察级'; txt = '心动容易，长久要靠经营。慢慢来，别急着交心。'; }
+  $('mate-result').innerHTML =
+    '<div class="mr-score">' + score + '</div>' +
+    '<div><b>' + lv + '</b> · ' + txt + '</div>' +
+    '<div style="font-size:12px;color:#2A9D8F;margin-top:6px;">星座能量视角：' + TYPES[theirs].name + ' 对你的吸引指数 ' + zm + '/100</div>';
+  $('mate-result').classList.add('on');
+}
+
+/* 纪念日挂件 */
+function calcDay() {
+  const mode = document.querySelector('input[name=daymode]:checked').value;
+  const val = $('day-input').value;
+  if (!val) { toast('请先选择日期'); return; }
+  const d = new Date(val + 'T00:00:00');
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const diff = Math.floor((d - today) / 86400000);
+  let days, txt;
+  if (mode === 'together') {
+    if (diff > 0) { days = diff; txt = '距离在一起那天，还有 ' + days + ' 天'; }
+    else if (diff === 0) { days = 0; txt = '今天就是纪念日，甜度满分'; }
+    else { days = -diff; txt = '你们已经相爱 ' + days + ' 天'; }
+  } else {
+    if (diff > 0) { days = diff; txt = '距离目标日还有 ' + days + ' 天'; }
+    else if (diff === 0) { days = 0; txt = '就是今天！冲鸭'; }
+    else { days = -diff; txt = '目标日已过去 ' + days + ' 天，继续加油'; }
+  }
+  lsSet('love_day_input', val);
+  $('day-card').innerHTML =
+    '<div class="dc-days">' + days + '</div>' +
+    '<div class="dc-txt">' + txt + '</div>' +
+    '<div class="dc-date">' + val + '</div>';
+  $('day-card').classList.add('on');
+}
+
+/* 贴纸保存 */
+function saveSticker() {
+  doCapture('sticker-grid', '恋爱贴纸-' + (state.birth ? ZODIACS[state.birth.zodiac].name : '') + TYPES[state.result.primary].name + '.png');
+}
+
+/* 通用截图 */
+function saveBlob(blob, name) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click();
+  setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 1000);
+}
+function saveBlobUrl(dataUrl, name) {
+  var a = document.createElement('a');
+  a.href = dataUrl; a.download = name;
+  document.body.appendChild(a); a.click();
+  setTimeout(function () { a.remove(); }, 1000);
+}
+/* 手机端通用预览保存：长按图片保存到相册 */
+function showTouchSave(dataUrl, name) {
+  var old = document.getElementById('touch-save-layer');
+  if (old) old.remove();
+  var lay = document.createElement('div');
+  lay.id = 'touch-save-layer';
+  lay.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(30,20,25,.72);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;padding:24px;';
+  lay.innerHTML =
+    '<div style="background:#fff;border-radius:16px;padding:10px;box-shadow:0 12px 40px rgba(0,0,0,.3);">' +
+      '<img src="' + dataUrl + '" style="display:block;max-width:80vw;max-height:68vh;border-radius:10px;" alt="生成图片">' +
+    '</div>' +
+    '<div style="color:#fff;font-size:15px;font-weight:600;text-align:center;">图片已生成 · 长按图片保存到相册</div>' +
+    '<button style="border:none;background:#fff;color:#B23A5F;font-size:15px;font-weight:700;padding:10px 34px;border-radius:999px;">完成</button>';
+  lay.onclick = function (e) { if (e.target === lay || e.target.tagName === 'BUTTON') lay.remove(); };
+  document.body.appendChild(lay);
+}
+function doCapture(elId, name, onImg) {
+  const el = $(elId);
+  if (typeof html2canvas === 'undefined') {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.8/dist/html2canvas-pro.min.js';
+    let done = false;
+    const t = setTimeout(function () { if (!done) { toast('图库加载慢，请稍后再点一次'); } }, 8000);
+    s.onload = function () { done = true; clearTimeout(t); toast('图库已就绪，请再点一次生成'); };
+    s.onerror = function () { done = true; clearTimeout(t); toast('网络异常，请直接用手机截图'); };
+    document.head.appendChild(s);
+    return;
+  }
+  toast('正在生成图片…');
+  waitImages(el).then(function () {
+    return html2canvas(el, { scale: 2, useCORS: false, backgroundColor: '#fff' });
+  })
+    .then(function (cv) {
+      if (onImg) { onImg(cv.toDataURL('image/png')); return; }
+      if (isTouch()) { showTouchSave(cv.toDataURL('image/png'), name); return; }
+      cv.toBlob(function (b) {
+        if (!b) { toast('生成失败，请直接用手机截图'); return; }
+        saveBlob(b, name);
+        toast('已保存，去相册看看吧');
+      }, 'image/png');
+    })
+    .catch(function () { toast('生成失败，请直接用手机截图'); });
+}
+
+/* 15 秒恋爱能量音 */
+let soundTimer = null;
+function playSound() {
+  const btn = $('sound-btn'), st = $('sound-state');
+  if (soundTimer) { clearTimeout(soundTimer); soundTimer = null; }
+  btn.textContent = '播放中…';
+  st.textContent = '深呼吸 1…2…3…';
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    const ac = new AC();
+    const master = ac.createGain();
+    master.gain.value = 0.45;
+    master.connect(ac.destination);
+    const chords = [
+      [261.63, 329.63, 392.00, 493.88],
+      [220.00, 261.63, 329.63, 392.00],
+      [174.61, 220.00, 261.63, 349.23],
+      [196.00, 246.94, 293.66, 392.00]
+    ];
+    let t = ac.currentTime + 0.05;
+    chords.forEach(function (ch) {
+      ch.forEach(function (f) {
+        const o = ac.createOscillator(), g = ac.createGain();
+        o.type = 'sine'; o.frequency.value = f;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.linearRampToValueAtTime(0.16, t + 0.5);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 3.6);
+        o.connect(g); g.connect(master);
+        o.start(t); o.stop(t + 3.7);
+      });
+      t += 3.75;
+    });
+    const phases = [['吸…', 0], ['呼…', 3000], ['吸…', 7000], ['呼…', 10000], ['放松…', 14000]];
+    phases.forEach(function (p) { setTimeout(function () { st.textContent = p[0]; }, p[1]); });
+    soundTimer = setTimeout(function () {
+      btn.textContent = '再听一次';
+      st.textContent = '已播放完 · 愿你好梦';
+    }, 16000);
+  } catch (e) {
+    st.textContent = '设备暂不支持音频';
+    btn.textContent = '播放能量音';
+  }
+}
+
+window.__qrData = (document.getElementById('wechat-qr-img') || {}).src || '';
+initBirth();
+window.__unlockBoxHTML = ($('unlock-box') ? $('unlock-box').innerHTML : '');
+</script>
+<script async src="assets/html2canvas-pro.min.js"></script>
+<button id="top-btn" onclick="backToTop()" aria-label="回到顶部"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><polyline points="5 12 12 5 19 12"/></svg></button>
+</body>
+</html>
